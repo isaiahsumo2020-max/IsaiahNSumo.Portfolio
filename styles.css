@@ -1,0 +1,168 @@
+/* Custom styles for enhanced visual effects */
+@layer utilities {
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl;
+  }
+  .btn-secondary {
+    @apply bg-transparent border-2 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white;
+  }
+}
+
+/* Smooth scrolling and focus styles for accessibility */
+html {
+  scroll-behavior: smooth;
+}
+
+.nav-link:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Animation utilities */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Project card hover effects */
+.project-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+  transform: translateY(-12px);
+}
+
+/* Skill and service card effects */
+.skill-card,
+.service-card,
+.research-interest {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-card:hover,
+.service-card:hover,
+.research-interest:hover {
+  transform: translateY(-8px);
+}
+
+/* Experience timeline responsive adjustments */
+@media (max-width: 768px) {
+  .experience-item {
+    flex-direction: column !important;
+    text-align: center;
+  }
+  
+  .experience-item .flex-shrink-0 {
+    margin: 0 auto 1rem auto !important;
+  }
+}
+
+/* Form focus states */
+input:focus, textarea:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Backdrop blur support for older browsers */
+@supports not (backdrop-filter: blur(10px)) {
+  .backdrop-blur-sm {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Add to your existing styles.css */
+
+/* Profile Image Styles */
+.profile-hero,
+.profile-about,
+.profile-mobile {
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-mobile {
+    aspect-ratio: 1;
+}
+
+/* CV Button Styles */
+.cv-button {
+    box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.3);
+}
+
+/* Mobile Profile - Perfect Circle */
+@media (max-width: 1024px) {
+    .profile-hero {
+        border-radius: 50% !important;
+        width: 280px !important;
+        height: 280px !important;
+    }
+    
+    .profile-hero img {
+        border-radius: 50% !important;
+    }
+}
+
+/* Experience Limited View */
+.experience-item ul li {
+    transition: all 0.3s ease;
+}
+
+.experience-item ul li:hover {
+    transform: translateX(8px);
+    color: #3b82f6;
+}
+
+/* About Section Stats Hover */
+@media (min-width: 1025px) {
+    .profile-about:hover .stats {
+        transform: scale(1.05);
+    }
+}
+
+
+/* MINI AI TEASER ANIMATIONS - Add to styles.css */
+@keyframes miniAiSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px) scale(0.9);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateX(-50%) translateY(-5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
+
+@keyframes miniAiPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.mini-ai-teaser {
+    animation: miniAiPulse 2s infinite;
+}
+
+.mini-ai-teaser:hover {
+    animation: none;
+}
+
+/* Ensure teaser doesn't interfere with CV button */
+.cv-button {
+    z-index: 25;
+}
+
+.mini-ai-teaser {
+    z-index: 30;
+}
