@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Bequizzy N. Sumo - IT Student | Networking & System Administration | Cybersecurity Advocate">
+        content="Isaiah N. Sumo - IT Student | Networking & System Administration | Cybersecurity Advocate">
     <title>Isaiah N. Sumo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -170,10 +170,10 @@
                 </a>
 
                 <!-- Future AI Assistant Button -->
-                <div
+                <div href="ai.html" id="mini-ai-teaser"
                     class="absolute -bottom-20 -right-4 bg-gradient-to-r from-orange-400 to-pink-500 p-4 rounded-2xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-not-allowed text-xs">
                     <i class="fas fa-robot text-white mr-1"></i>
-                    <span class="text-white font-medium">Ask Bequizzy AI (Coming Soon)</span>
+                    <span class="text-white font-medium">Ask Isaiah AI</span>
                 </div>
             </div>
         </div>
@@ -798,19 +798,21 @@
             </div>
             <div class="border-t border-gray-800/50 pt-2 pb-4">
                 <p class="text-sm text-gray-500 mb-4">
-                    © 2026 Bequizzy N. Sumo. | Built with
+                    © 2026 Isaiah N. Sumo. | Built with
                     HTML • Tailwind CSS • Vanilla JavaScript
                 </p>
             </div>
         </div>
     </footer>
-
-    <!-- <script src="script.js"></script> -->
-    <script src="isaiah.js"></script>
+<!-- 
+    <script src="script.js"></script>
+    <script src="isaiah.js"></script> -->
+    <script src="Assistant.js"></script>
     <!-- <script src="personal.js"></script> -->
 
     <!-- Isaiah AI Complete Widget - ADD THIS -->
-    <div id="bequizzy-ai-widget" class="fixed bottom-6 right-6 z-[999] hidden">
+   <div id="isaiah-ai-widget" class="fixed bottom-6 right-6 z-[999]">
+
         <!-- Toggle Button -->
         <button id="ai-toggle-btn"
             class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center justify-center text-xl fixed bottom-6 right-6 z-[1000]">
@@ -933,7 +935,9 @@
     </div>
 
     <!-- Mini AI Teaser (appears under CV button) -->
-    <div id="mini-ai-teaser"
+    <div 
+    href="isaiah-ai-widget"
+    id="mini-ai-teaser"
         class="fixed bottom-28 right-6 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-2xl shadow-2xl cursor-pointer hover:shadow-3xl transition-all duration-300 hidden z-[999] flex items-center gap-3 max-w-sm">
         <div class="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center">
             <i class="fas fa-robot text-white text-sm"></i>
@@ -944,8 +948,6 @@
         </div>
         <i class="fas fa-chevron-up text-xs"></i>
     </div>
-
-
 </body>
 
 </html>
