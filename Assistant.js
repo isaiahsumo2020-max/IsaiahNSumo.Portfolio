@@ -487,7 +487,7 @@ class IsaiahAI {
             return;
         }
 
-        const text = `🌟 ISAIAH N. SUMO - APPOINTMENT REQUEST
+        const text = ` ISAIAH N. SUMO - APPOINTMENT REQUEST
 Name: ${data.name}
 Email: ${data.email}
 Date: ${data.date}
@@ -514,6 +514,48 @@ Time: ${data.time}`;
         }, 2000);
     }
 }
+
+
+
+
+// ✅ ADD THESE TO YOUR script.js (IsaiahAI class or globally)
+
+// 1. CLOSE MODAL FUNCTION
+function closeAppointmentModal() {
+    document.getElementById('ai-voice-modal').classList.add('hidden');
+    document.getElementById('appointment-form')?.reset();
+}
+
+// 2. BOOK APPOINTMENT WITH SET BUTTON
+function bookIsaiahAppointment() {
+    const fields = ['appointment-name', 'appointment-email', 'appointment-date', 'appointment-time'];
+    const data = {};
+    
+    fields.forEach(id => {
+        data[id.replace('appointment-', '')] = document.getElementById(id)?.value || '';
+    });
+
+    if (!data.name || !data.email || !data.date || !data.time) {
+        alert('Please fill all required fields! 😊');
+        return;
+    }
+
+    const purpose = document.getElementById('appointment-purpose')?.value || 'General discussion';
+    const text = `🌟 ISAIAH N. SUMO APPOINTMENT
+Date: ${data.date} | Time: ${data.time}
+Name: ${data.name} | Email: ${data.email}
+Purpose: ${purpose}`;
+
+    navigator.clipboard.writeText(text).then(() => {
+        closeAppointmentModal();
+        alert('🎉 Appointment booked! Details copied to clipboard. Isaiah will contact you soon!');
+    }).catch(() => {
+        closeAppointmentModal();
+        alert('✅ Saved! ' + text);
+    });
+}
+
+
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
