@@ -1,6 +1,6 @@
 // =================================================================
-// ISAIAH N. SUMO PORTFOLIO v5.1 - FIXED VOICE CALLING (NO REPEATS)
-// Perfect conversation flow + Voice responds ONCE per input
+// ISAIAH N. SUMO AI v7.1 - END CALL BUTTON + PERFECT VOICE CONTROL
+// Natural conversation + End call stops EVERYTHING
 // =================================================================
 
 class PortfolioApp {
@@ -84,111 +84,154 @@ class PortfolioApp {
                     entry.target.classList.remove('opacity-0', 'translate-y-10');
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('section[id], .skill-card, .service-card, .project-card, .research-interest, .experience-item')
-            .forEach(el => {
-                el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
-                observer.observe(el);
-            });
+        document.querySelectorAll('section[id]').forEach(el => {
+            el.classList.add('opacity-0', 'translate-y-10', 'transition-all');
+            observer.observe(el);
+        });
     }
 
     handleContactForm(e) {
         e.preventDefault();
         const btn = e.target.querySelector('button[type="submit"]');
         const original = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         btn.disabled = true;
         setTimeout(() => {
             alert('Thank you! Message sent successfully. 🚀');
             e.target.reset();
             btn.innerHTML = original;
             btn.disabled = false;
-        }, 2000);
+        }, 1500);
     }
 
     initAIAssistant() { new IsaiahAI(); }
 }
 
-// 🧠 ISAIAH AI v5.1 - FIXED VOICE (NO REPEATS + PROPER LISTENING)
+// 🌟 ISAIAH AI v7.1 - PERFECT END CALL + NATURAL CONVERSATION
 class IsaiahAI {
     constructor() {
-        this.isTyping = false;
-        this.isVoiceActive = false;
+        this.isListening = false;
         this.isProcessing = false;
-        this.conversationHistory = [];
+        this.conversationCount = 0;
         this.synthesis = window.speechSynthesis;
-        this.initSpeechRecognition();
+        this.personalityQuotes = [
+            "Success is where preparation meets opportunity - Isaiah N. Sumo",
+            "Every great network starts with one strong connection",
+            "Cybersecurity: Protecting today, securing tomorrow",
+            "Code is poetry, networks are symphonies"
+        ];
+        this.initSpeech();
         this.bindEvents();
+        this.createEndCallButton(); // ✅ NEW: End Call Button
         this.startTeaser();
     }
 
-    initSpeechRecognition() {
+    // ✅ NEW: Creates visible END CALL button
+    createEndCallButton() {
+        if (document.getElementById('end-call-btn')) return;
+
+        const endCallBtn = document.createElement('button');
+        endCallBtn.id = 'end-call-btn';
+        endCallBtn.innerHTML = '<i class="fas fa-phone-slash mr-2"></i>End Call';
+        endCallBtn.className = 'fixed top-4 right-4 z-50 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-2xl shadow-2xl font-semibold transition-all duration-200 flex items-center hidden md:flex';
+        endCallBtn.style.zIndex = '9999';
+        
+        endCallBtn.addEventListener('click', () => {
+            this.stopVoiceCompletely();
+        });
+
+        document.body.appendChild(endCallBtn);
+    }
+
+    initSpeech() {
         if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            this.recognition = new SpeechRecognition();
+            const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+            this.recognition = new Speech();
             
-            // FIXED: Proper continuous listening settings
             this.recognition.continuous = true;
             this.recognition.interimResults = false;
             this.recognition.lang = 'en-US';
 
-            // ✅ FIXED EVENT HANDLERS - NO REPEATING
             this.recognition.onstart = () => {
-                this.isVoiceActive = true;
-                this.updateVoiceStatus('🎙️ Listening... Speak now!');
-                console.log('🔴 Voice call started - listening...');
+                this.isListening = true;
+                this.updateStatus('🎙️ Listening...');
+                this.showEndCallButton(); // ✅ Show End Call during listening
             };
 
             this.recognition.onresult = (event) => {
-                // Only process FINAL results (no interim spam)
-                const finalResult = event.results[event.results.length - 1];
-                if (finalResult.isFinal && !this.isProcessing) {
-                    const transcript = finalResult[0].transcript.trim();
-                    console.log('📝 Heard:', transcript);
-                    this.handleVoiceInput(transcript);
-                }
-            };
+                if (this.isProcessing) return;
+                
+                const finalTranscript = Array.from(event.results)
+                    .filter(r => r.isFinal)
+                    .map(r => r[0].transcript)
+                    .join(' ').trim();
 
-            this.recognition.onerror = (event) => {
-                console.log('❌ Voice error:', event.error);
-                this.updateVoiceStatus('🔄 Restarting...');
-                // Auto-restart on error (but not during processing)
-                if (this.isVoiceActive && !this.isProcessing) {
-                    setTimeout(() => this.restartListening(), 500);
+                if (finalTranscript && finalTranscript.length > 2) {
+                    this.handleInput(finalTranscript);
                 }
             };
 
             this.recognition.onspeechend = () => {
-                console.log('🗣️ Speech ended - restarting listen...');
-                if (this.isVoiceActive && !this.isProcessing) {
-                    setTimeout(() => this.restartListening(), 300);
+                if (this.isListening && !this.isProcessing) {
+                    setTimeout(() => this.recognition?.start(), 600);
                 }
             };
 
+            this.recognition.onerror = () => {
+                if (this.isListening && !this.isProcessing) {
+                    setTimeout(() => this.recognition?.start(), 800);
+                }
+            };
+
+            // ✅ NEW: Catch recognition end to hide End Call button
             this.recognition.onend = () => {
-                console.log('🔚 Recognition ended');
-                if (this.isVoiceActive && !this.isProcessing) {
-                    setTimeout(() => this.restartListening(), 100);
+                if (!this.isListening) {
+                    this.hideEndCallButton();
                 }
             };
         }
     }
 
-    restartListening() {
-        if (this.isVoiceActive && this.recognition && !this.isProcessing) {
-            this.recognition.start();
+    // ✅ NEW: PERFECT End Call - Stops EVERYTHING
+    stopVoiceCompletely() {
+        console.log('🔴 END CALL - Stopping everything');
+        
+        // Stop speech synthesis (AI talking)
+        this.synthesis.cancel();
+        
+        // Stop speech recognition (listening)
+        this.isListening = false;
+        this.isProcessing = false;
+        if (this.recognition) {
+            this.recognition.stop();
+        }
+        
+        // Update status
+        this.updateStatus('📴 Call ended');
+        
+        // Hide End Call button
+        this.hideEndCallButton();
+        
+        // Add goodbye message
+        this.addMessage('👋 Call ended. Click microphone to start a new conversation!', 'ai');
+    }
+
+    showEndCallButton() {
+        const btn = document.getElementById('end-call-btn');
+        if (btn) {
+            btn.classList.remove('hidden');
+            btn.style.display = 'flex';
         }
     }
 
-    updateVoiceStatus(message) {
-        const statusEl = document.getElementById('voice-status');
-        if (statusEl) statusEl.textContent = message;
-        
-        const stopBtn = document.getElementById('voice-stop-btn');
-        const startBtn = document.getElementById('voice-start-btn');
-        if (stopBtn) stopBtn.classList.toggle('hidden', !this.isVoiceActive);
-        if (startBtn) startBtn.classList.toggle('hidden', this.isVoiceActive);
+    hideEndCallButton() {
+        const btn = document.getElementById('end-call-btn');
+        if (btn) {
+            btn.classList.add('hidden');
+            btn.style.display = 'none';
+        }
     }
 
     bindEvents() {
@@ -196,16 +239,16 @@ class IsaiahAI {
             'ai-toggle-btn': () => this.toggleChat(),
             'ai-minimize-btn': () => this.minimizeChat(),
             'ai-close-btn': () => this.closeChat(),
-            'ai-send-btn': () => this.sendTextMessage(),
-            'ai-voice-btn': () => this.toggleVoiceCall(),
-            'voice-start-btn': () => this.startVoiceCall(),
-            'voice-stop-btn': () => this.stopVoiceCall(),
+            'ai-send-btn': () => this.sendText(),
+            'ai-voice-btn': () => this.toggleVoice(),
+            'voice-start-btn': () => this.startVoice(),
+            'voice-stop-btn': () => this.stopVoiceCompletely(), // ✅ Uses complete stop
             'book-appointment-btn': () => this.bookAppointment()
         };
 
-        Object.entries(controls).forEach(([id, handler]) => {
+        Object.entries(controls).forEach(([id, fn]) => {
             const el = document.getElementById(id);
-            if (el) el.addEventListener('click', handler);
+            if (el) el.addEventListener('click', fn.bind(this));
         });
 
         const input = document.getElementById('ai-input');
@@ -213,128 +256,182 @@ class IsaiahAI {
             input.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
-                    this.sendTextMessage();
+                    this.sendText();
                 }
             });
         }
 
-        document.querySelectorAll('.ai-quick-btn').forEach(btn => {
-            btn.addEventListener('click', () => this.sendTextMessage(btn.textContent));
+        document.querySelectorAll('button[data-ai-action], .ai-quick-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const action = btn.dataset.aiAction || btn.textContent?.trim().toLowerCase();
+                this.sendText(action);
+            });
         });
     }
 
     toggleChat() {
         const panel = document.getElementById('ai-chat-panel');
-        if (panel) {
-            panel.classList.toggle('hidden');
-            if (!panel.classList.contains('hidden')) {
-                document.getElementById('ai-input')?.focus();
-            }
-        }
+        panel?.classList.toggle('hidden');
+        if (!panel?.classList.contains('hidden')) document.getElementById('ai-input')?.focus();
     }
 
     minimizeChat() { document.getElementById('ai-chat-panel')?.classList.add('hidden'); }
     
     closeChat() {
-        this.stopVoiceCall();
+        this.stopVoiceCompletely();
         document.getElementById('bequizzy-ai-widget')?.classList.add('hidden');
         document.getElementById('mini-ai-teaser')?.classList.add('hidden');
     }
 
-    // 🔤 TEXT CHAT (SILENT)
-    sendTextMessage() {
-        const input = document.getElementById('ai-input');
-        const text = input?.value.trim();
-        if (!text || this.isTyping) return;
+    toggleVoice() { this.isListening ? this.stopVoiceCompletely() : this.startVoice(); }
 
-        this.addMessage(text, 'user');
-        input.value = '';
-        this.processMessage(text.toLowerCase(), false);
+    startVoice() {
+        this.isListening = true;
+        this.updateStatus('🎙️ Isaiah AI here! Talk to me...');
+        this.recognition?.start();
     }
 
-    // 🎙️ VOICE INPUT (VOICE RESPONSE)
-    async handleVoiceInput(transcript) {
+    stopVoice() {
+        this.isListening = false;
+        this.isProcessing = false;
+        this.recognition?.stop();
+        this.updateStatus('📴 Voice off');
+        this.hideEndCallButton();
+    }
+
+    updateStatus(msg) {
+        const statusEl = document.getElementById('voice-status');
+        if (statusEl) statusEl.textContent = msg;
+    }
+
+    handleInput(transcript) {
         if (this.isProcessing) return;
-        
+        this.conversationCount++;
         this.addMessage(transcript, 'user');
-        await this.processMessage(transcript.toLowerCase(), true);
+        this.processInput(transcript.toLowerCase());
     }
 
-    // 🎯 CORE PROCESSING (ONE RESPONSE PER INPUT)
-    async processMessage(text, useVoice) {
+    sendText(override = null) {
+        const input = document.getElementById('ai-input');
+        const text = override || input?.value?.trim();
+        if (!text || this.isProcessing) return;
+
+        this.conversationCount++;
+        this.addMessage(text, 'user');
+        if (input && !override) input.value = '';
+        this.processInput(text.toLowerCase());
+    }
+
+    async processInput(text) {
         if (this.isProcessing) return;
         this.isProcessing = true;
-        this.isTyping = true;
-
-        this.addTypingIndicator();
-
-        const response = await this.generateResponse(text);
-        this.removeTypingIndicator();
         
+        this.showTyping();
+        await new Promise(r => setTimeout(r, 1200));
+        
+        const response = this.getNaturalResponse(text);
+        this.removeTyping();
         this.addMessage(response, 'ai');
         
-        // VOICE ONLY when voice mode active
-        if (useVoice && this.isVoiceActive) {
-            this.speakResponse(response);
+        if (this.isListening) {
+            setTimeout(() => this.speak(response), 300);
         }
-
+        
         this.isProcessing = false;
-        this.isTyping = false;
     }
 
-    addTypingIndicator() {
+    showTyping() {
         this.addMessage(`
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center gap-3 p-3">
                 <div class="typing-dots">
                     <div class="dot"></div><div class="dot"></div><div class="dot"></div>
                 </div>
-                <span class="text-sm text-gray-500 dark:text-gray-400">Isaiah AI responding...</span>
+                <span>Isaiah AI thinking...</span>
             </div>`, 'ai');
     }
 
-    removeTypingIndicator() {
+    removeTyping() {
         const messages = document.getElementById('ai-messages');
-        const lastMessage = messages?.lastElementChild;
-        if (lastMessage && lastMessage.querySelector('.typing-dots')) {
-            lastMessage.remove();
+        const typing = messages?.querySelector('.typing-dots');
+        typing?.closest('.ai-message')?.remove();
+    }
+
+    getNaturalResponse(message) {
+        const turn = this.conversationCount;
+        
+        if (turn === 1 || message.match(/hi|hello|hey|good morning|good afternoon/i)) {
+            return `Hey there! 😊 Welcome! I'm Isaiah AI, here to chat about the amazing <strong>Isaiah N. Sumo</strong>. 
+            <br><br>"Success is where preparation meets opportunity" ✨ - Isaiah N. Sumo
+            <br><br>How did you hear about Isaiah? LinkedIn, referral, or just browsing?`;
         }
-    }
 
-    toggleVoiceCall() {
-        if (this.isVoiceActive) {
-            this.stopVoiceCall();
-        } else {
-            this.startVoiceCall();
+        if (message.includes('how are you') || message.includes('how r u')) {
+            return `I'm fantastic, thanks for asking! 😄 Always excited to talk about Isaiah. 
+            <br><br>By the way, what's your story? What brings you to Isaiah's world today?`;
         }
-    }
 
-    startVoiceCall() {
-        this.isVoiceActive = true;
-        this.updateVoiceStatus('🎙️ Calling Isaiah AI... Speak now!');
-        if (this.recognition) {
-            this.recognition.start();
-        } else {
-            alert('🎙️ Voice calls work best in Chrome/Edge. Use text chat instead.');
-            this.stopVoiceCall();
+        if (message.includes('isaiah') || message.includes('who') || message.includes('about')) {
+            return `Isaiah N. Sumo is an incredible IT expert from Liberia! 🌍
+            <br>• <strong>Networking wizard</strong> - makes complex networks simple
+            <br>• <strong>Cybersecurity advocate</strong> - keeps data safe
+            <br>• <strong>Web developer</strong> - builds beautiful sites
+            <br><br>What's most interesting to you about his work?`;
         }
-    }
 
-    stopVoiceCall() {
-        this.isVoiceActive = false;
-        this.isProcessing = false;
-        this.recognition?.stop();
-        this.updateVoiceStatus('📴 Voice call ended');
-        console.log('🔇 Voice call stopped');
-    }
+        if (message.includes('skill') || message.includes('skills') || message.includes('expertise')) {
+            return `Isaiah's superpowers! 💪
+            <br>• <strong>NETWORKING:</strong> Subnetting, routing, troubleshooting like a boss
+            <br>• <strong>SYSTEMS:</strong> Linux & Windows server master
+            <br>• <strong>CYBERSECURITY:</strong> Training & awareness expert
+            <br>• <strong>WEB DEV:</strong> Modern responsive websites
+            <br>• <strong>DESIGN:</strong> Adobe Creative Suite professional
+            
+            <br><br>Which area excites you most? Want to see his projects?`;
+        }
 
-    speakResponse(text) {
-        const cleanText = text.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, '');
-        const utterance = new SpeechSynthesisUtterance(cleanText);
-        utterance.rate = 0.95;
-        utterance.pitch = 1.05;
-        utterance.volume = 0.9;
-        utterance.onend = () => console.log('✅ Speech finished');
-        this.synthesis.speak(utterance);
+        if (message.includes('project') || message.includes('projects') || message.includes('work')) {
+            return `Isaiah's game-changing projects! 🎯
+            <br>• <strong>InfoCheck Liberia</strong> - Fighting fake news in Liberia
+            <br>• <strong>School Management System</strong> - Revolutionizing education
+            <br>• <strong>Isaiah de Blogger</strong> - His personal content empire
+            
+            <br><br>"Every great network starts with one strong connection" - Isaiah
+            <br><br>Which project sounds coolest to you?`;
+        }
+
+        if (message.includes('appointment') || message.includes('book') || message.includes('meet') || message.includes('contact')) {
+            document.getElementById('ai-voice-modal')?.classList.remove('hidden');
+            return `Perfect choice! 📅 I've opened Isaiah's appointment form. 
+            <br>He responds within 24 hours and loves connecting with people like you!
+            <br><br>What's this meeting about?`;
+        }
+
+        if (message.includes('nice') || message.includes('cool') || message.includes('awesome') || message.includes('great')) {
+            return `I know, right? 😎 Isaiah's work is 🔥! 
+            <br><br>Want to dive deeper into his skills, see his projects, or book time to chat with him directly?`;
+        }
+
+        if (message.includes('thank') || message.includes('thanks')) {
+            return `My pleasure! 😊 Isaiah's story is worth sharing. 
+            <br><br>Before you go, anything else you're curious about? His latest project maybe?`;
+        }
+
+        if (message.includes('linkedin') || message.includes('referral') || message.includes('found') || message.includes('hear')) {
+            return `Awesome! 🙌 Love hearing Isaiah's network is growing. 
+            <br><br>Quick question: What caught your attention about Isaiah first? His tech skills or something else?`;
+        }
+
+        if (message.includes('fun') || message.includes('joke') || message.includes('haha')) {
+            return `😄 Glad you're having fun! Isaiah says: "Code is poetry, networks are symphonies!" 
+            <br><br>Want the serious stuff now? Skills, projects, or book time with him?`;
+        }
+
+        return `Happy to help! 😊 Here's what I know best about Isaiah:
+        <br>• Say <strong>"skills"</strong> - See his expertise
+        <br>• Say <strong>"projects"</strong> - His amazing work
+        <br>• Say <strong>"book appointment"</strong> - Connect directly
+        
+        <br><br>Or tell me - what's got you excited about Isaiah today? ✨`;
     }
 
     addMessage(text, sender) {
@@ -342,21 +439,21 @@ class IsaiahAI {
         if (!messages) return;
 
         const div = document.createElement('div');
-        div.className = `ai-message ${sender === 'ai' ? 'ai-message-ai animate-fadeInUp' : 'ai-message-user animate-fadeInUp'}`;
+        div.className = `ai-message ${sender === 'ai' ? 'ai-message-ai' : 'ai-message-user'} fade-in mb-4`;
 
         if (sender === 'ai') {
             div.innerHTML = `
-                <div class="ai-avatar w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center text-white font-semibold text-sm mr-3 flex-shrink-0">AI</div>
-                <div class="bg-gradient-to-r from-purple-50/90 to-blue-50/90 dark:from-purple-500/20 dark:to-blue-500/20 border border-purple-200/50 dark:border-blue-500/30 rounded-2xl px-4 py-3 max-w-[85%]">${text}</div>
-            `;
+                <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0">AI</div>
+                    <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 border rounded-2xl p-4 max-w-[85%] leading-relaxed">${text}</div>
+                </div>`;
         } else {
             div.innerHTML = `
                 <div class="flex justify-end">
-                    <div class="bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-200/50 dark:border-purple-500/30 rounded-2xl px-4 py-3 max-w-[85%]">
-                        <div class="text-sm text-gray-900 dark:text-white">${this.escapeHtml(text)}</div>
+                    <div class="bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-600/30 border rounded-2xl p-4 max-w-[85%]">
+                        <span class="text-sm text-gray-900 dark:text-white">${this.escapeHtml(text)}</span>
                     </div>
-                </div>
-            `;
+                </div>`;
         }
 
         messages.appendChild(div);
@@ -369,88 +466,35 @@ class IsaiahAI {
         return div.innerHTML;
     }
 
-    // 🧠 NATURAL CONVERSATION (ONE RESPONSE PER INPUT)
-    async generateResponse(message) {
-        this.conversationHistory.push({ role: 'user', content: message });
-
-        // Greeting
-        if (['hello', 'hi', 'hey', 'good morning', 'good afternoon'].some(g => message.includes(g))) {
-            return `Hello! 😊 I'm Isaiah AI. Great to meet you! What would you like to know about <strong>Isaiah N. Sumo</strong>? Try asking about his skills, projects, or say "book appointment".`;
-        }
-
-        // Thanks
-        if (['thank', 'thanks', 'appreciate'].some(t => message.includes(t))) {
-            return `You're welcome! 😊 Happy to help. Anything else about Isaiah I can tell you?`;
-        }
-
-        // Casual chat
-        if (message.includes('how are you') || message.includes('how r u')) {
-            return `I'm doing great, thanks for asking! 😄 Ready to tell you all about Isaiah N. Sumo. What interests you most?`;
-        }
-
-        // Who is Isaiah
-        if (message.includes('isaiah') || message.includes('who') || message.includes('name')) {
-            return `Isaiah N. Sumo is an <strong>IT expert</strong> from Liberia specializing in:
-            <br>• <strong>Networking</strong>: Subnetting, routing, troubleshooting
-            <br>• <strong>System Admin</strong>: Linux & Windows
-            <br>• <strong>Cybersecurity</strong>: Awareness training
-            <br>• <strong>Web Development</strong> & <strong>Graphic Design</strong>`;
-        }
-
-        // Skills
-        if (['skill', 'skills', 'expert', 'what can he do'].some(s => message.includes(s))) {
-            return `Isaiah's top skills:
-            <br>• <strong>Networking</strong>: Subnetting, routing, diagnostics
-            <br>• <strong>System Admin</strong>: Linux/Windows servers
-            <br>• <strong>Cybersecurity</strong>: Training & policy
-            <br>• <strong>Web Dev</strong>: HTML/CSS/JavaScript
-            <br>• <strong>Graphic Design</strong>: Adobe Suite`;
-        }
-
-        // Projects
-        if (['project', 'work', 'portfolio'].some(p => message.includes(p))) {
-            return `Isaiah's featured projects:
-            <br>• <strong>InfoCheck Liberia</strong> - Verify information
-            <br>• <strong>School Management</strong> - Education platform
-            <br>• <strong>Isaiah de Blogger</strong> - Content site`;
-        }
-
-        // Appointment
-        if (['appointment', 'book', 'schedule', 'meet'].some(a => message.includes(a))) {
-            document.getElementById('ai-voice-modal')?.classList.remove('hidden');
-            return `📅 Appointment form opened! Fill in your details and Isaiah will contact you within 24 hours. 😊`;
-        }
-
-        return `I can help with:
-        <br>• Isaiah's <strong>skills & experience</strong>
-        <br>• His <strong>projects & portfolio</strong>
-        <br>• <strong>Book appointment</strong> 📅
-        <br><br>Say "skills", "projects", or "book appointment"! 😊`;
+    speak(text) {
+        if (!this.isListening) return; // Don't speak if call ended
+        const cleanText = text.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, '');
+        this.synthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.rate = 0.92;
+        utterance.pitch = 1.05;
+        utterance.volume = 0.9;
+        this.synthesis.speak(utterance);
     }
 
     bookAppointment() {
-        const data = {
-            name: document.getElementById('appointment-name')?.value || '',
-            email: document.getElementById('appointment-email')?.value || '',
-            date: document.getElementById('appointment-date')?.value || '',
-            time: document.getElementById('appointment-time')?.value || '',
-            purpose: document.getElementById('appointment-purpose')?.value || ''
-        };
+        const fields = ['appointment-name', 'appointment-email', 'appointment-date', 'appointment-time'];
+        const data = {};
+        fields.forEach(id => data[id.replace('appointment-', '')] = document.getElementById(id)?.value || '');
 
-        if (!data.name || !data.email || !data.date || !data.time) {
-            alert('Please fill: Name, Email, Date, Time ⭐');
+        if (fields.some(id => !data[id.replace('appointment-', '')])) {
+            alert('Please fill all fields! 😊');
             return;
         }
 
-        const text = `🌟 ISAIAH N. SUMO APPOINTMENT
+        const text = `🌟 ISAIAH N. SUMO - APPOINTMENT REQUEST
 Name: ${data.name}
 Email: ${data.email}
 Date: ${data.date}
-Time: ${data.time}
-Purpose: ${data.purpose}`;
+Time: ${data.time}`;
 
         navigator.clipboard.writeText(text).then(() => {
-            alert('✅ Appointment booked! 📋 Copied to clipboard!');
+            alert('🎉 Appointment booked! Details copied to clipboard. Isaiah will connect soon!');
             document.getElementById('ai-voice-modal')?.classList.add('hidden');
             document.getElementById('appointment-form')?.reset();
         });
@@ -460,8 +504,7 @@ Purpose: ${data.purpose}`;
         setTimeout(() => {
             const showTeaser = () => {
                 const teaser = document.getElementById('mini-ai-teaser');
-                const panel = document.getElementById('ai-chat-panel');
-                if (teaser && panel?.classList.contains('hidden')) {
+                if (teaser && document.getElementById('ai-chat-panel')?.classList.contains('hidden')) {
                     teaser.classList.remove('hidden');
                     setTimeout(() => teaser.classList.add('hidden'), 5000);
                 }
@@ -472,21 +515,20 @@ Purpose: ${data.purpose}`;
     }
 }
 
-// 🏁 INITIALIZE
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    if (!document.getElementById('ai-styles-v5')) {
+    if (!document.getElementById('isaiah-ai-styles')) {
         const style = document.createElement('style');
-        style.id = 'ai-styles-v5';
+        style.id = 'isaiah-ai-styles';
         style.textContent = `
-            @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+            .fade-in { animation: fade-in 0.5s ease-out; }
             @keyframes typing { 0%,60%,100% { transform: scale(1); } 30% { transform: scale(1.2); } }
-            .animate-fadeInUp { animation: fadeInUp 0.6s ease-out; }
             .typing-dots { display: flex; gap: 4px; align-items: center; }
             .dot { width: 8px; height: 8px; background: #6b7280; border-radius: 50%; animation: typing 1.4s infinite; }
             .dot:nth-child(2) { animation-delay: 0.2s; }
             .dot:nth-child(3) { animation-delay: 0.4s; }
-            #mini-ai-teaser { animation: pulse 2s infinite; }
-            @keyframes pulse { 0%,100%{opacity:0.7;} 50%{opacity:1;} }
+            #end-call-btn:hover { transform: scale(1.05) !important; box-shadow: 0 10px 25px rgba(239,68,68,0.4) !important; }
         `;
         document.head.appendChild(style);
     }
