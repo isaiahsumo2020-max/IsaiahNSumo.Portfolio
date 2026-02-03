@@ -279,7 +279,7 @@ class IsaiahAI {
     
     closeChat() {
         this.stopVoiceCompletely();
-        document.getElementById('bequizzy-ai-widget')?.classList.add('hidden');
+        document.getElementById('isaiah-ai-widget')?.classList.add('hidden');
         document.getElementById('mini-ai-teaser')?.classList.add('hidden');
     }
 
@@ -433,6 +433,96 @@ class IsaiahAI {
         
         <br><br>Or tell me - what's got you excited about Isaiah today? ✨`;
     }
+
+
+
+
+
+    // PersonalInformation(message) {
+    //     const turn = this.conversationCount;
+        
+    //     if (turn === 1 || message.match(/Birth|education|hey|good morning|good afternoon/i)) {
+    //         return `Hey there! 😊 Welcome! I'm Isaiah AI, here to chat about the amazing <strong>Isaiah N. Sumo</strong>. 
+    //         <br><br>"Success is where preparation meets opportunity" ✨ - Isaiah N. Sumo
+    //         <br><br>How did you hear about Isaiah? LinkedIn, referral, or just browsing?`;
+    //     }
+
+    //     if (message.includes('how are you') || message.includes('how r u')) {
+    //         return `I'm fantastic, thanks for asking! 😄 Always excited to talk about Isaiah. 
+    //         <br><br>By the way, what's your story? What brings you to Isaiah's world today?`;
+    //     }
+
+    //     if (message.includes('isaiah') || message.includes('who') || message.includes('about')) {
+    //         return `Isaiah N. Sumo is an incredible IT expert from Liberia! 🌍
+    //         <br>• <strong>Networking wizard</strong> - makes complex networks simple
+    //         <br>• <strong>Cybersecurity advocate</strong> - keeps data safe
+    //         <br>• <strong>Web developer</strong> - builds beautiful sites
+    //         <br><br>What's most interesting to you about his work?`;
+    //     }
+
+    //     if (message.includes('skill') || message.includes('skills') || message.includes('expertise')) {
+    //         return `Isaiah's superpowers! 💪
+    //         <br>• <strong>NETWORKING:</strong> Subnetting, routing, troubleshooting like a boss
+    //         <br>• <strong>SYSTEMS:</strong> Linux & Windows server master
+    //         <br>• <strong>CYBERSECURITY:</strong> Training & awareness expert
+    //         <br>• <strong>WEB DEV:</strong> Modern responsive websites
+    //         <br>• <strong>DESIGN:</strong> Adobe Creative Suite professional
+            
+    //         <br><br>Which area excites you most? Want to see his projects?`;
+    //     }
+
+    //     if (message.includes('project') || message.includes('projects') || message.includes('work')) {
+    //         return `Isaiah's game-changing projects! 🎯
+    //         <br>• <strong>InfoCheck Liberia</strong> - Fighting fake news in Liberia
+    //         <br>• <strong>School Management System</strong> - Revolutionizing education
+    //         <br>• <strong>Isaiah de Blogger</strong> - His personal content empire
+            
+    //         <br><br>"Every great network starts with one strong connection" - Isaiah
+    //         <br><br>Which project sounds coolest to you?`;
+    //     }
+
+    //     if (message.includes('appointment') || message.includes('book') || message.includes('meet') || message.includes('contact')) {
+    //         document.getElementById('ai-voice-modal')?.classList.remove('hidden');
+    //         return `Perfect choice! 📅 I've opened Isaiah's appointment form. 
+    //         <br>He responds within 24 hours and loves connecting with people like you!
+    //         <br><br>What's this meeting about?`;
+    //     }
+
+    //     if (message.includes('nice') || message.includes('cool') || message.includes('awesome') || message.includes('great')) {
+    //         return `I know, right? 😎 Isaiah's work is 🔥! 
+    //         <br><br>Want to dive deeper into his skills, see his projects, or book time to chat with him directly?`;
+    //     }
+
+    //     if (message.includes('thank') || message.includes('thanks')) {
+    //         return `My pleasure! 😊 Isaiah's story is worth sharing. 
+    //         <br><br>Before you go, anything else you're curious about? His latest project maybe?`;
+    //     }
+
+    //     if (message.includes('linkedin') || message.includes('referral') || message.includes('found') || message.includes('hear')) {
+    //         return `Awesome! 🙌 Love hearing Isaiah's network is growing. 
+    //         <br><br>Quick question: What caught your attention about Isaiah first? His tech skills or something else?`;
+    //     }
+
+    //     if (message.includes('fun') || message.includes('joke') || message.includes('haha')) {
+    //         return `😄 Glad you're having fun! Isaiah says: "Code is poetry, networks are symphonies!" 
+    //         <br><br>Want the serious stuff now? Skills, projects, or book time with him?`;
+    //     }
+
+    //     return `Happy to help! 😊 Here's what I know best about Isaiah:
+    //     <br>• Say <strong>"skills"</strong> - See his expertise
+    //     <br>• Say <strong>"projects"</strong> - His amazing work
+    //     <br>• Say <strong>"book appointment"</strong> - Connect directly
+        
+    //     <br><br>Or tell me - what's got you excited about Isaiah today? ✨`;
+    // }
+
+
+
+
+
+
+
+
 
     addMessage(text, sender) {
         const messages = document.getElementById('ai-messages');
