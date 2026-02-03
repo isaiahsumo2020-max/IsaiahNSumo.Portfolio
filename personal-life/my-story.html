@@ -20,37 +20,54 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-*{ 
-    box-sizing: border-box; 
-    max-width: 100%; 
-}
-html, body { 
-    overflow-x: hidden; 
-    width: 100vw; 
-    max-width: 100%; 
-}
-.sheet { 
-    background: #fff; 
-    box-shadow: 0 0 0.5in rgba(0,0,0,0.1); 
-    margin: 0 auto; 
-    max-width: 100%; 
-    overflow-x: hidden;
-}
-.prose p { 
-    margin-bottom: 1.5em; 
-    line-height: 1.75; 
-    word-break: break-word;
-    overflow-wrap: break-word;
-}
-@media screen and (max-width: 640px) {
-    .sheet { padding: 1rem !important; margin: 0 0.5rem; }
-    .prose { font-size: 1rem; }
-}
-@media print { 
-    body { -webkit-print-color-adjust: exact; } 
-    .sheet { box-shadow: none; margin: 0; }
-}
+        * {
+            box-sizing: border-box;
+            max-width: 100%;
+        }
 
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100vw;
+            max-width: 100%;
+        }
+
+        .sheet {
+            background: #fff;
+            box-shadow: 0 0 0.5in rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .prose p {
+            margin-bottom: 1.5em;
+            line-height: 1.75;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        @media screen and (max-width: 640px) {
+            .sheet {
+                padding: 1rem !important;
+                margin: 0 0.5rem;
+            }
+
+            .prose {
+                font-size: 1rem;
+            }
+        }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+
+            .sheet {
+                box-shadow: none;
+                margin: 0;
+            }
+        }
     </style>
 </head>
 
@@ -86,12 +103,12 @@ html, body {
             <div class="p-12 sm:p-16 lg:p-20 border-b-8 border-blue-100 dark:border-blue-900/50">
                 <!-- Header -->
                 <div class="text-center mb-12 pb-12 border-b-4 border-gray-200 dark:border-gray-700">
-                    <div class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-8 rounded-3xl shadow-2xl overflow-hidden border-4 border-white/50 bg-gradient-to-r from-blue-500 to-purple-600">
-    <img 
-        src="Assests/My Profile1.png" 
-        alt="Isaiah N. Sumo"
-        class="w-full h-full md:w-96 md:h-96 mx-auto md:mx-0 rounded-3xl md:rounded-3xl object-cover rounded-3xl hover:scale-110 transition-transform duration-500">
-</div>
+                    <div
+                        class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-8 rounded-3xl shadow-2xl overflow-hidden border-4 border-white/50 bg-gradient-to-r from-blue-500 to-purple-600">
+                        <img src="../Assests/My Profile1.png" alt="Isaiah N. Sumo - Professional Headshot"
+                            class="w-full h-full object-cover rounded-3xl hover:scale-110 transition-transform duration-500"
+                            onerror="this.parentElement.innerHTML='<i class=\"fas fa-user text-3xl text-white\"></i>'">
+                    </div>
 
                     <h1
                         class="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 dark:text-gray-700 mb-4 tracking-tight">
