@@ -8,18 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @media print {
-            body {
-                -webkit-print-color-adjust: exact;
-                color-adjust: exact;
-            }
-        }
-
-        .sheet {
-            background: white;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-
         * {
             box-sizing: border-box;
             max-width: 100%;
@@ -49,10 +37,14 @@
 
         @media screen and (max-width: 640px) {
             .sheet {
-                padding: 1rem !important;
-                margin: 0 0.5rem;
+                
+                
+            }
+            h1 {
+                text-align: center;
             }
 
+           
             .prose {
                 font-size: 1rem;
             }
@@ -104,15 +96,15 @@
                 <!-- Header -->
                 <div class="text-center mb-12 pb-12 border-b-4 border-gray-200 dark:border-gray-700">
                     <div
-                        class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-8 rounded-3xl shadow-2xl overflow-hidden border-4 border-white/50 bg-gradient-to-r from-blue-500 to-purple-600">
+                        class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-8 rounded-3xl shadow-2xl overflow-hidden border-4 border-white/50">
                         <img src="../Assests/My Profile1.png" alt="Isaiah N. Sumo - Professional Headshot"
                             class="w-full h-full object-cover rounded-3xl hover:scale-110 transition-transform duration-500"
                             onerror="this.parentElement.innerHTML='<i class=\"fas fa-user text-3xl text-white\"></i>'">
                     </div>
 
                     <h1
-                        class="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 dark:text-gray-700 mb-4 tracking-tight">
-                        MY AUTOBIOGRAPHY
+                        class="text-4xl sm:text-5xl text-center md:text-6xl font-black text-gray-900 dark:text-gray-700 mb-4">
+                        MY<br>AUTOBIOGRAPHY
                     </h1>
                     <div class="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
                     <p class="text-2xl font-semibold text-gray-600 dark:text-gray-300 mt-6 italic">
