@@ -357,169 +357,130 @@ class IsaiahAI {
     }
 
     getNaturalResponse(message) {
-        const msg = message.toLowerCase().trim();  // ✅ FIXED: Single source of truth
-        const turn = this.conversationCount;
+    const msg = message.toLowerCase().trim();
+    const turn = this.conversationCount;
 
-        // ===== 1. AUTOBIOGRAPHY (NEW) =====
-
-        if (msg.includes("hello") || msg.includes("hi") || msg.includes("hey")) {
-            return "👋 Hello! I'm Isaiah N. Sumo's assistant. Ask me about his skills, projects, OR his incredible autobiography – from Civil Compound struggles to valedictorian!";
-        }
-
-        // Who is Isaiah
-        if (msg.includes("who") && (msg.includes("isaiah") || msg.includes("you") || msg.includes("name"))) {
-            return "Isaiah N. Sumo was born July 5, 1999, in Gbarnga City, Bong County. He's a <strong>BSc IT student</strong> at BlueCrest University (Networking & System Admin), former <strong>valedictorian</strong>, <strong>NOCAL scholar</strong>, and self-made success from post-war Liberia.";
-        }
-
-        // Birth & Name
-        if (msg.includes("born") || msg.includes("birth") || msg.includes("1999") || msg.includes("nyenian")) {
-            return "Isaiah was born <strong>July 5, 1999</strong> at CB Dumba Hospital, Civil Compound, Gbarnga City. The 'N' stands for <em>Nyenian</em> – Kpelleh for <strong>'The World'</strong>, named by aunt <strong>Annie T. Sumo</strong>.";
-        }
-
-        // Family & Early Life
-        if (msg.includes("family") || msg.includes("parents") || msg.includes("childhood") || msg.includes("grand")) {
-            return "After his parents <strong>George Sumo</strong> & <strong>Hellena N. Sengbeh</strong> separated, Isaiah was raised by grandparents & aunt <strong>Esther N. Sumo</strong>. They survived on sugarcane farming 1hr 10min walk from home during post-civil war hardship.";
-        }
-
-        // Health Struggles
-        if (msg.includes("sick") || msg.includes("ill") || msg.includes("health")) {
-            return "As a toddler, Isaiah survived serious illness. At age 11 starting school, another critical illness nearly took him. Both times, family dedication & God's mercy brought full recovery.";
-        }
-
-        // Losses
-        if (msg.includes("grandfather") || msg.includes("grandmother") || msg.includes("died")) {
-            return "Grandfather <strong>Mr. Sumo B. Dolo</strong> died June 8, 2008, before school promise. Grandmother <strong>Ma. Gbarngo G. Sumo</strong> passed November 14, 2014, post-Ebola from breast cancer. Aunt Esther lost sight in 2013.";
-        }
-
-        // First School (Age 11)
-        if (msg.includes("school") && (msg.includes("first") || msg.includes("11") || msg.includes("kingdom"))) {
-            return "Isaiah started school at <strong>age 11</strong> (2010) at <strong>Kingdom Garden ABC, Jorphenmue Public School</strong>. Earned double promotions despite another illness. Completed elementary through community support.";
-        }
-
-        // 2017 Monrovia Move
-        if (msg.includes("2017") || msg.includes("monrovia") || msg.includes("uncle")) {
-            return "July 21, 2017 (age 18), Isaiah moved to Montserrado with uncle in Wood Camp, Paynesville. Uncle said: 'You're staying for school.' Isaiah replied: <em>'Thank you so much, Uncle. I am grateful.'</em>";
-        }
-
-        // Juice Hustle
-        if (msg.includes("juice") || msg.includes("selling") || msg.includes("hustle")) {
-            return "Isaiah sold cold juice after school: <strong>20% commission</strong> (20 LD per 100 LD sales). Best days: 1,200 LD sales = 240 LD earnings. Left school 1:30 PM, walked 20 mins, prepared & sold till evening.";
-        }
-
-        // Businesses
-        if (msg.includes("business") || msg.includes("mosquito") || msg.includes("minutes") || msg.includes("belt")) {
-            return "Sold mosquito coils, Orange/Lonestar minutes (repaid cousin Richard Sumo in 2 weeks), waist belts. Supported by uncle's wife <strong>Athaniel Mulbah</strong> + parents.";
-        }
-
-        // DJ Bequizzy
-        if (msg.includes("dj") || msg.includes("bequizzy")) {
-            return "<strong>DJ Bequizzy</strong> – Isaiah's stage name from helping fetch water. Reflects belief: <em>'God never forgets anyone.'</em> Earned occasional LD 1,500 monthly.";
-        }
-
-        // Valedictorian
-        if (msg.includes("valedictorian") || msg.includes("graduate") || msg.includes("waec")) {
-            return "Isaiah graduated from <strong>valedictorian</strong> Pipeline Junior & Senior High School PJSHS, under (MCSS), on 29, sept, 2022. Class sponsor <strong>Mr. Darvison K. Guanue</strong>. school Principal was: <strong>Mrs. Josephine K. Barclay</strong>, at the time.";
-        }
-
-        // NOCAL Scholarship
-        if (msg.includes("nocal") || msg.includes("scholarship")) {
-            return "Post-valedictorian speech, Isaiah received <strong>NOCAL national scholarship</strong> for any university – major milestone after years of self-funding education.";
-        }
-
-        // Current Studies
-        if (msg.includes("university") || msg.includes("bluecrest") || msg.includes("it")) {
-            return "<strong>BSc Information Technology (Networking & System Admin)</strong> at <strong>BlueCrest University Liberia</strong>. Trains at <strong>Orange Digital Center</strong>: Web Dev, IoT, TinyML + cybersecurity & graphic design.";
-        }
-
-        // Mindset
-        if (msg.includes("mindset") || msg.includes("faith") || msg.includes("purpose")) {
-            return `Isaiah's creed: "<em>I know my background offers no guaranteed support. I must stand firmly... God will fulfill His purpose. I will reach my destination.</em>" Kindness ≠ weakness.`;
-        }
-
-        // ===== YOUR ORIGINAL RESPONSES (KEEP ALL) =====
-        if (msg.includes("skills") || msg.includes("career")) {
-            return "Isaiah excels in HTML, CSS (Tailwind), graphic design, basic cybersecurity, system support, IT solutions, printing, and digital design for organizations.";
-        }
-
-        // ===== 2. YOUR ORIGINAL GREETINGS =====
-        if (turn === 1 || msg.match(/hi|hello|hey|good morning|good afternoon/i)) {
-            return `Hey there! 😊 Welcome! I'm Isaiah AI, here to chat about the amazing <strong>Isaiah N. Sumo</strong>. 
-                <br><br>"Success is where preparation meets opportunity" ✨ - Isaiah N. Sumo
-                <br><br>Skills, projects, OR autobiography? Say "born", "hustle", "juice", or "valedictorian"`;
-        }
-
-        if (msg.includes('how are you') || msg.includes('how r u') || msg.includes('doig')) {
-            return `I'm fantastic, thanks! 😄 Always excited to talk about Isaiah. 
-                <br><br>Skills, projects, or his journey from juice seller to valedictorian?`;
-        }
-
-        // ===== 3. YOUR ORIGINAL SKILLS & PROJECTS =====
-        if (msg.includes('isaiah') || msg.includes('who') || msg.includes('about')) {
-            return `Isaiah N. Sumo is an incredible IT expert from Liberia! 🌍
-                <br>• <strong>Networking wizard</strong> - makes complex networks simple
-                <br>• <strong>Cybersecurity advocate</strong> - keeps data safe
-                <br>• <strong>Web developer</strong> - builds beautiful sites
-                <br><br>Skills, projects, or autobiography?`;
-        }
-
-        if (msg.includes('skill') || msg.includes('skills') || msg.includes('expertise') || msg.includes('do')) {
-            return `Isaiah's superpowers! 💪
-                <br>• <strong>NETWORKING:</strong> Subnetting, routing, troubleshooting
-                <br>• <strong>SYSTEMS:</strong> Linux & Windows server master
-                <br>• <strong>CYBERSECURITY:</strong> Training & awareness expert
-                <br>• <strong>WEB DEV:</strong> Modern responsive websites
-                <br>• <strong>DESIGN:</strong> Adobe Creative Suite professional
-                <br><br>Which area excites you most?`;
-        }
-
-        if (msg.includes('project') || msg.includes('projects') || msg.includes('work')) {
-            return `Isaiah's game-changing projects! 🎯
-                <br>• <strong>InfoCheck Liberia</strong> - Fighting fake news
-                <br>• <strong>School Management System</strong> - Revolutionizing education
-                <br>• <strong>Bequizzy de Blogger</strong> - Personal content empire,  
-                <br>• <strong>LLeads Liberia</strong>-creating It related solutions.
-                <br><br>Which sounds coolest?`;
-        }
-
-        // ===== 4. APPOINTMENT (KEEP) =====
-        if (msg.includes('appointment') || msg.includes('book') || msg.includes('meet') || msg.includes('contact') || msg.includes('discuss')) {
-            document.getElementById('ai-voice-modal')?.classList.remove('hidden');
-            return `Perfect! 📅 I've opened Isaiah's appointment form. He responds within 24 hours!
-                <br><br>What's this meeting about?`;
-        }
-
-        // ===== 5. POSITIVE & CLOSING (KEEP) =====
-        if (msg.includes('nice') || msg.includes('cool') || msg.includes('awesome') || msg.includes('great')) {
-            return `I know, right? 😎 Isaiah's work is! 
-                <br><br>Skills, projects, autobiography ("born", "juice"), or book time?`;
-        }
-
-        if (msg.includes('thank') || msg.includes('thanks')|| msg.includes('appreciate')) {
-            return `My pleasure! 😊 Isaiah's story inspires everyone.
-                <br><br>Skills, projects, or autobiography before you go?`;
-        }
-
-        if (msg.includes('linkedin') || msg.includes('referral') || msg.includes('found') || msg.includes('hear') || msg.includes('friend') || msg.includes('mate')) {
-            return `Awesome! 🙌 Love hearing Isaiah's network is growing. 
-                <br> What would you like to know? <br>Skills, projects, or his story?`;
-        }
-
-        if (msg.includes('fun') || msg.includes('joke') || msg.includes('haha')) {
-            return `😄 Glad you're having fun! Isaiah says: "Code is poetry, networks are symphonies!" 
-                <br><br>Skills, projects, or about him?`;
-        }
-
-        // ===== 6. PERFECT DEFAULT =====
-        return `Happy to help! 😊 Here's what I know about Isaiah:
-            <br>• <strong>"skills"</strong> - IT expertise
-            <br>• <strong>"projects"</strong> - Amazing work  
-            <br>• <strong>"born"</strong> - Life story start
-            <br>• <strong>"juice"</strong> - Hustle story
-            <br>• <strong>"valedictorian"</strong> - Big win
-            <br>• <strong>"book appointment"</strong> - Connect directly
-            <br><br>What's got you excited about Isaiah today? ✨`;
+    // ===== 1. PRIVACY-SAFE AUTOBIOGRAPHY (NEW) =====
+    if (msg.includes("born") || msg.includes("birth") || msg.includes("childhood") || msg.includes("early")) {
+        return `Isaiah was born in Liberia and raised in a close-knit community under challenging circumstances. His early life was shaped by family separation and economic hardship, building resilience from a very young age. He was primarily raised by loving grandparents, aunts, and extended family who were his foundation. 🌱`;
     }
 
+    if (msg.includes("family") || msg.includes("parents") || msg.includes("grandparents") || msg.includes("raised")) {
+        return `Isaiah's grandparents, aunts, and extended family played a critical role in his upbringing. They sustained the household through small-scale farming during post-conflict years when resources were scarce. Family support was his anchor through tough times. 👨‍👩‍👧‍👦`;
+    }
+
+    if (msg.includes("health") || msg.includes("sick") || msg.includes("ill") || msg.includes("challenge")) {
+        return `Isaiah faced serious health challenges as a child in a post-conflict environment where healthcare access was limited. Through family dedication, faith, and resilience, he recovered stronger each time. These experiences built his unbreakable spirit. 💪`;
+    }
+
+    if (msg.includes("school") || msg.includes("education") || msg.includes("started school")) {
+        return `Isaiah began formal education later than most peers but advanced through elementary and secondary school through discipline and determination. He balanced academics with survival work, showing incredible commitment to learning despite obstacles. 📚`;
+    }
+
+    if (msg.includes("work") || msg.includes("hustle") || msg.includes("trading") || msg.includes("survival")) {
+        return `To support his education, Isaiah engaged in small-scale trading and informal work while attending school. This self-reliance taught him the value of hard work and resourcefulness, skills he carries into his professional life today. 💼`;
+    }
+
+    if (msg.includes("valedictorian") || msg.includes("graduate") || msg.includes("top") || msg.includes("scholarship")) {
+        return `Through perseverance and self-belief, Isaiah rose academically and graduated as <strong>Valedictorian</strong>! This achievement earned him a <strong>national scholarship</strong> – validation of years of sacrifice and determination. 🎓✨`;
+    }
+
+    if (msg.includes("university") || msg.includes("college") || msg.includes("student") || msg.includes("study")) {
+        return `Today, Isaiah pursues <strong>Information Technology</strong> specializing in <strong>Networking & System Administration</strong>. He's passionate about <strong>Cybersecurity</strong>, <strong>Web Development</strong>, and digital innovation to empower communities. 🚀`;
+    }
+
+    if (msg.includes("journey") || msg.includes("story") || msg.includes("life") || msg.includes("resilience")) {
+        return `Isaiah's journey reflects <strong>resilience, self-determination, and faith</strong>. From post-conflict hardship to national scholarship recipient and IT specialist, he turned challenges into opportunities to build solutions for others. 🌟`;
+    }
+
+    // ===== 2. NATURAL CONVERSATION FLOW (ENHANCED) =====
+    if (turn === 1 || msg.match(/hi|hello|hey|good morning|good afternoon|start/i)) {
+        return `Hey there! 😊 Welcome! I'm Isaiah AI, your guide to the inspiring story of <strong>Isaiah N. Sumo</strong>. 
+                <br><br><em>"Success is where preparation meets opportunity"</em> ✨
+                <br><br>Say "story" for his journey, "skills" for expertise, "projects" for his work, or "book appointment" to connect directly!`;
+    }
+
+    if (msg.includes('how are you') || msg.includes('how r u') || msg.includes("feeling")) {
+        return `I'm doing great, thanks for asking! 😄 Always energized sharing Isaiah's incredible journey from hardship to high achievement.
+                <br><br>What part of his story interests you most today?`;
+    }
+
+    if (msg.includes('amazing') || msg.includes('inspiring') || msg.includes('wow') || msg.includes('incredible')) {
+        return `I know, right? Isaiah's story moves everyone! 😊 From survival challenges to becoming a top IT specialist – pure resilience.
+                <br><br>Want more details about his education journey, technical skills, or how to connect with him?`;
+    }
+
+    if (msg.includes('why') || msg.includes('reason') || msg.includes('motivation')) {
+        return `Isaiah's drive comes from <strong>self-belief and faith</strong>. He learned early that no one hands you success – you build it through discipline and determination.
+                <br><br>His mantra: Turn challenges into opportunities. What motivates you?`;
+    }
+
+    // ===== 3. ORIGINAL PROFESSIONAL RESPONSES (KEEP) =====
+    if (msg.includes('isaiah') || msg.includes('who') || msg.includes('about') || msg.includes('background')) {
+        return `Isaiah N. Sumo is a <strong>Networking & Systems specialist</strong> from Liberia with an inspiring journey:
+                <br>• <strong>Valedictorian + National Scholar</strong>
+                <br>• <strong>BSc IT student</strong> (Networking focus)
+                <br>• <strong>Cybersecurity advocate</strong>
+                <br>• <strong>Web developer</strong> & designer
+                <br><br>Curious about his story, skills, or projects?`;
+    }
+
+    if (msg.includes('skill') || msg.includes('skills') || msg.includes('expertise') || msg.includes('tech')) {
+        return `Isaiah's technical expertise: 💻
+                <br>• <strong>NETWORKING:</strong> Subnetting, routing, troubleshooting
+                <br>• <strong>SYSTEMS:</strong> Linux/Windows server administration  
+                <br>• <strong>CYBERSECURITY:</strong> Risk assessment & awareness
+                <br>• <strong>WEB DEV:</strong> HTML/CSS/JS, TailwindCSS, responsive design
+                <br>• <strong>DESIGN:</strong> Professional graphic design
+                <br><br>Which area interests you most?`;
+    }
+
+    if (msg.includes('project') || msg.includes('projects') || msg.includes('portfolio') || msg.includes('work')) {
+        return `Isaiah's impactful projects: 🚀
+                <br>• <strong>InfoCheck Liberia</strong> – Combating misinformation
+                <br>• <strong>Education Management System</strong> – Streamlining school operations  
+                <br>• <strong>Personal Portfolio</strong> – Showcasing his technical journey
+                <br><br>Want details on any project or see his live work?`;
+    }
+
+    // ===== 4. ENGAGEMENT & APPOINTMENT =====
+    if (msg.includes('appointment') || msg.includes('book') || msg.includes('meet') || msg.includes('connect') || msg.includes('contact')) {
+        document.getElementById('ai-voice-modal')?.classList.remove('hidden');
+        return `Excellent choice! 📅 Opening Isaiah's appointment form now.
+                <br><strong>He responds within 24 hours</strong> and loves meaningful conversations!
+                <br><br>What's the purpose of your meeting?`;
+    }
+
+    if (msg.includes('email') || msg.includes('message') || msg.includes('reach')) {
+        return `Want to connect directly? 📧 Just say <strong>"book appointment"</strong> and I'll open Isaiah's calendar.
+                <br><br>He's always excited to discuss tech solutions, career advice, or collaboration opportunities!`;
+    }
+
+    // ===== 5. POSITIVE FEEDBACK & CLOSING =====
+    if (msg.includes('nice') || msg.includes('cool') || msg.includes('awesome') || msg.includes('great') || msg.includes('love')) {
+        return `Glad you think so! 😎 Isaiah's combination of resilience + technical skill is rare.
+                <br><br>Ready to dive deeper? "skills", "projects", "story", or "book appointment"?`;
+    }
+
+    if (msg.includes('thank') || msg.includes('thanks') || msg.includes('bye')) {
+        return `You're welcome! 🙏 Isaiah's journey inspires everyone who hears it.
+                <br><br>Before you go: "skills", "projects", "story", or "book appointment" for direct contact? 😊`;
+    }
+
+    if (msg.includes('fun') || msg.includes('joke') || msg.includes('haha') || msg.includes('lol')) {
+        return `😂 Glad you're enjoying this! Isaiah would say: <em>"Code is poetry, networks are symphonies!"</em>
+                <br><br>Ready for the serious stuff? Skills, projects, his story, or book time?`;
+    }
+
+    // ===== 6. ENHANCED DEFAULT WITH BETTER PROMPTS =====
+    return `I'd love to share more about Isaiah! Here are the best topics: ✨
+            <br><strong>• "story" / "born"</strong> – His inspiring journey
+            <br><strong>• "skills" / "tech"</strong> – IT expertise  
+            <br><strong>• "projects"</strong> – Game-changing work
+            <br><strong>• "valedictorian"</strong> – Academic triumph
+            <br><strong>• "book appointment"</strong> – Connect directly
+            <br><br><em>What's most interesting to you about Isaiah?</em>`;
+}
 
     //     getNaturalResponse(message) {
     //         const turn = this.conversationCount;

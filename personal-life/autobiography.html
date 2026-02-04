@@ -3,170 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Isaiah N. Sumo - My Journey | From Struggle to Success</title>
+    <title>Isaiah N. Sumo - My Journey | Privacy-Safe Story</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-/* ✅ BULLETPROOF MOBILE SCROLL FIX */
-* { 
-    box-sizing: border-box; 
-    max-width: 100%; 
-}
-html, body { 
-    overflow-x: hidden; 
-    width: 100vw; 
-    max-width: 100%; 
-}
-.sheet { 
-    background: #fff; 
-    box-shadow: 0 0 0.5in rgba(0,0,0,0.1); 
-    margin: 0 auto; 
-    max-width: 100%; 
-    overflow-x: hidden;
-}
-.prose p { 
-    margin-bottom: 1.5em; 
-    line-height: 1.75; 
-    word-break: break-word;
-    overflow-wrap: break-word;
-}
-@media screen and (max-width: 640px) {
-    .sheet { padding: 1rem !important; margin: 0 0.5rem; }
-    .prose { font-size: 1rem; }
-}
-@media print { 
-    body { -webkit-print-color-adjust: exact; } 
-    .sheet { box-shadow: none; margin: 0; }
-}
-</style>
-
-</head>
-<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-purple-900 min-h-screen">
     
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl z-50 border-b border-white/20 dark:border-slate-700/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- ✅ BULLETPROOF MOBILE SCROLL + CLEAN STYLES -->
+    <style>
+        /* Mobile Scroll Fix */
+        * { box-sizing: border-box; max-width: 100%; }
+        html, body { overflow-x: hidden; width: 100vw; }
+        
+        .story-sheet { 
+            background: white; 
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-width: 100%; 
+            overflow-x: hidden;
+        }
+        .prose p { 
+            margin-bottom: 1.5em; 
+            line-height: 1.75; 
+            word-break: break-word;
+        }
+        @media (max-width: 640px) {
+            .story-sheet { padding: 1.5rem !important; margin: 0 0.5rem; }
+            .prose { font-size: 1.05rem; }
+        }
+        @media print { 
+            body { -webkit-print-color-adjust: exact; } 
+            .story-sheet { box-shadow: none; margin: 0; }
+        }
+        /* Clean subtle shadows */
+        .timeline-card { 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            transition: all 0.3s ease;
+        }
+        .timeline-card:hover { 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-400 min-h-screen text-gray-900 dark:text-gray-900">
+    
+    <!-- Clean Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl z-50 border-b border-gray-200 dark:border-slate-700 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
-                <a href="/index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-gray-900 bg-clip-text text-gray-400 flex items-center gap-3">
-                    <i class="fas fa-network-wired"></i>
+                <a href="index.html" class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    <i class="fas fa-home text-blue-600"></i>
                     Isaiah N. Sumo
                 </a>
-                <a href="/index.html" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-gray-900 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                    ← Back to Home
-                </a>
+                <div class="flex gap-3">
+                    <a href="index.html" class="px-6 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl font-medium transition-all">
+                        ← Home
+                    </a>
+                    <a href="autobiography.html" class="px-6 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 dark:bg-blue-900/50 dark:hover:bg-blue-800 dark:text-blue-300 rounded-xl font-medium transition-all">
+                        Timeline View
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - Clean Design -->
     <section class="pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <div class="text-center mb-16">
-            <div class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 mx-auto mb-8 bg-gradient-to-r from-blue-600 to-gray-900 rounded-3xl flex items-center justify-center shadow-2xl">
-                <i class="fas fa-book-open text-3xl sm:text-4xl md:text-5xl text-white"></i>
-            </div>
-            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-400 via-blue-600 to-purple-900 bg-clip-text text-transparent mb-6 leading-tight">
+            <!-- Profile Image -->
+            <div
+                        class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-8 rounded-3xl shadow-2xl overflow-hidden border-4 border-white/50">
+                        <img src="../Assests/My Profile1.png" alt="Isaiah N. Sumo - Professional Headshot"
+                            class="w-full h-full object-cover rounded-3xl hover:scale-110 transition-transform duration-500"
+                            onerror="this.parentElement.innerHTML='<i class=\"fas fa-user text-3xl text-white\"></i>'">
+                    </div>
+            
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
                 My Journey
             </h1>
-            <p class="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                From Civil Compound to Valedictorian. A story of faith, resilience, and unbreakable determination.
+            <p class="text-xl sm:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed mb-8">
+                A privacy-safe story of resilience, self-determination, and turning challenges into opportunity.
             </p>
+            <div class="w-24 h-px bg-slate-300 dark:bg-slate-600 mx-auto mb-8"></div>
         </div>
 
-        <!-- Timeline Content -->
-        <div class="max-w-4xl mx-auto prose prose-lg sm:prose-xl dark:prose-invert lg:prose-2xl">
-            <div class="bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-3xl p-8 sm:p-12 lg:p-16 shadow-2xl border border-white/50 dark:border-slate-700/50">
-                
-                <p class="text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8 first:mb-12">
-                    I was born on <strong>July 5, 1999</strong>, at CB Dumba Hospital, Civil Compound Community, Gbarnga City, Bong County, Republic of Liberia. Born into the relationship of <strong>George Sumo</strong> and <strong>Hellena N. Sengbeh</strong>, both from the Kpelleh ethnic group. The "N" in my name stands for <strong>"Nyenian"</strong> – a Kpelleh name meaning <em>"The World"</em>, given to me by my aunt, <strong>Annie T. Sumo</strong>.
-                </p>
+        <!-- Main Story Sheet -->
+        <div class="story-sheet rounded-3xl p-8 sm:p-12 lg:p-16 mx-auto max-w-4xl shadow-2xl border border-slate-200 dark:border-slate-700">
+            
+            <!-- Privacy-Safe Story Content -->
+            <div class="prose prose-lg sm:prose-xl max-w-none leading-relaxed mb-12">
+                <p><strong>I was born in Liberia</strong> and raised in a close-knit community under challenging circumstances. My early life was shaped by family separation and economic hardship, which required me to grow resilient from a very young age. I was raised by my grandparents, aunts, and extended family members who played a critical role in my upbringing.</p>
 
-                <div class="space-y-8 sm:space-y-12">
-                    <!-- 2007-2008 -->
-                    <div class="flex items-start gap-6 p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-slate-800/50 dark:to-purple-900/20 rounded-2xl border-l-4 border-blue-500">
-                        <div class="w-12 h-12 bg-blue-500 text-white rounded-2xl flex items-center justify-center font-bold text-lg flex-shrink-0">2007</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Childhood Struggles & Loss</h3>
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">Grew up in challenging circumstances after my parents separated. Survived serious illness during Liberia's post-civil crisis recovery. Raised by grandparents and aunts who depended on a sugarcane farm 1hr 10min walk away. My grandfather, <strong>Mr. Sumo B. Dolo</strong>, passed away June 8, 2008, before fulfilling his promise to enroll me in school.</p>
-                        </div>
-                    </div>
+                <p>Growing up in a post-conflict environment, access to basic resources, including healthcare and education was limited. I experienced serious health challenges as a child, but through family support and faith, I recovered and continued forward. My grandparents sustained the household through small-scale farming, which became the foundation of our survival during difficult years.</p>
 
-                    <!-- 2010-2016 -->
-                    <div class="flex items-start gap-6 p-6 bg-gradient-to-r from-purple-50/50 to-emerald-50/50 dark:from-slate-800/50 dark:to-emerald-900/20 rounded-2xl border-l-4 border-purple-500">
-                        <div class="w-12 h-12 bg-purple-500 text-white rounded-2xl flex items-center justify-center font-bold text-lg flex-shrink-0">2010</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">First Steps in Education</h3>
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">Started school at age 11 at <strong>Kingdom Garden (ABC) at Jorphenmue Public School</strong>. Survived another critical illness. Earned double promotions due to academic excellence. Completed elementary education through community support despite family tragedies including my grandmother's breast cancer diagnosis and aunt's sudden blindness.</p>
-                        </div>
-                    </div>
+                <p>Despite repeated setbacks and the loss of key family support figures, I remained committed to education. I began school later than many of my peers and advanced through elementary and secondary education through discipline, strong values, and the willingness to work for my own survival. Throughout my academic journey, I supported myself through small-scale trading and informal work while balancing school responsibilities.</p>
 
-                    <!-- 2017 -->
-                    <div class="flex items-start gap-6 p-6 bg-gradient-to-r from-emerald-50/50 to-amber-50/50 dark:from-slate-800/50 dark:to-amber-900/20 rounded-2xl border-l-4 border-emerald-500">
-                        <div class="w-12 h-12 bg-emerald-500 text-white rounded-2xl flex items-center justify-center font-bold text-lg flex-shrink-0">2017</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Life-Changing Move</h3>
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">At 18, moved to Montserrado County to live with uncle. Self-determination became my mantra: <em>"I must stand firmly... God will fulfill His purpose for me."</em> Overcame household challenges, engaged in small-scale trading (cheese, biscuits), attended <strong>Jawalah Community School</strong> and later <strong>Pipeline Junior & Senior High School</strong>.</p>
-                        </div>
-                    </div>
+                <p>Through perseverance, self-belief, and faith, I rose academically and graduated as <strong>Valedictorian</strong>, an achievement that earned me a <strong>national scholarship</strong> to pursue higher education.</p>
 
-                    <!-- 2019-2022 -->
-                    <div class="flex items-start gap-6 p-6 bg-gradient-to-r from-amber-50/50 to-rose-50/50 dark:from-slate-800/50 dark:to-rose-900/20 rounded-2xl border-l-4 border-amber-500">
-                        <div class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center font-bold text-lg flex-shrink-0">2022</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Self-Made Success</h3>
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">Self-funded education selling cold juice (20% commission), mosquito coils, mobile minutes, waist belts. Became <strong>DJ Bequizzy</strong>. Graduated as <strong>Valedictorian</strong> at <strong>Pipeline Junior & Senior High School</strong>. Awarded <strong>NOCAL National Scholarship</strong> for university.</p>
-                        </div>
-                    </div>
+                <p>Today, I am an <strong>Information Technology student</strong> specializing in <strong>Networking and System Administration</strong>, with interests in <strong>Cybersecurity</strong>, <strong>Web Development</strong>, and digital innovation. My journey reflects resilience, self-determination, and a commitment to building solutions that empower others.</p>
+            </div>
 
-                    <!-- Today -->
-                    <div class="flex items-start gap-6 p-6 bg-gradient-to-r from-rose-50/50 to-slate-50/50 dark:from-slate-800/50 dark:to-blue-900/20 rounded-2xl border-l-4 border-rose-500">
-                        <div class="w-12 h-12 bg-gradient-to-r from-rose-500 to-purple-600 text-white rounded-2xl flex items-center justify-center font-bold text-lg flex-shrink-0">2026</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Building the Future</h3>
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">Currently pursuing <strong>BSc Information Technology (Networking & System Administration)</strong> at <strong>BlueCrest University Liberia</strong>. Training at <strong>Orange Digital Center</strong> in Web Development, IoT, TinyML. Building expertise in Cybersecurity and Graphic Design.</p>
-                        </div>
+            <!-- Timeline Highlights - Privacy Safe -->
+            <div class="grid md:grid-cols-2 gap-8 mt-16 pt-12 border-t border-slate-200 dark:border-slate-700">
+                <div class="timeline-card p-8 rounded-2xl bg-slate-50  border border-slate-200 dark:border-slate-700 hover:border-blue-300">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-seedling text-blue-600 text-2xl"></i>
                     </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 text-slate-600 dark:text-white">Foundation</h3>
+                    <p class="text-center text-slate-600 dark:text-slate-300 leading-relaxed">Raised by grandparents through small-scale farming. Learned resilience and family values early.</p>
                 </div>
 
-                <!-- Powerful Closing -->
-                <div class="mt-16 pt-12 border-t-4 border-gradient-to-r border-blue-500 bg-gradient-to-r from-blue-50/80 to-purple-50/80 dark:from-slate-900/50 dark:to-purple-900/30 p-8 rounded-3xl">
-                    <blockquote class="text-center">
-                        <p class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white italic mb-6 leading-relaxed max-w-3xl mx-auto">
-                            "My journey is a testament to <strong>resilience, faith, and determination</strong>. 
-                            Despite early hardships, illness, and limited support, I relied on hard work, 
-                            discipline, and self-reliance to pursue my education. 
-                            <strong>I hope my story inspires others to never give up.</strong>"
-                        </p>
-                        <div class="w-24 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
-                    </blockquote>
+                <div class="timeline-card p-8 rounded-2xl bg-emerald-50 dark:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-700 hover:border-emerald-400">
+                    <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-graduation-cap text-emerald-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 text-slate-600 dark:text-white">Academic Rise</h3>
+                    <p class="text-center text-slate-600 dark:text-slate-300 leading-relaxed">Self-funded education through trading while excelling academically. Graduated Valedictorian.</p>
                 </div>
+
+                <div class="timeline-card p-8 rounded-2xl bg-purple-50 dark:bg-purple-900/50 border border-purple-200 dark:border-purple-700 hover:border-purple-400">
+                    <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-shield-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 text-slate-600 dark:text-white">National Recognition</h3>
+                    <p class="text-center text-slate-300 dark:text-slate-300 leading-relaxed">Earned national scholarship for academic excellence – turning challenges into opportunity.</p>
+                </div>
+
+                <div class="timeline-card p-8 rounded-2xl bg-blue-50 dark:bg-blue-900/50 border border-blue-200 dark:border-blue-700 hover:border-blue-400">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-laptop-code text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 text-slate-600 dark:text-white">Today</h3>
+                    <p class="text-center text-slate-600 dark:text-slate-300 leading-relaxed">BSc IT student specializing in Networking, Cybersecurity, Web Development, and digital innovation.</p>
+                </div>
+            </div>
+
+            <!-- Powerful Closing - Clean Design -->
+            <div class="mt-20 pt-12 border-t-4 border-blue-200 dark:border-blue-800 bg-slate-50/50 dark:bg-slate-800/50 p-10 rounded-3xl text-center">
+                <blockquote class="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white italic mb-8 leading-relaxed max-w-3xl mx-auto">
+                    "My journey reflects <strong>resilience, self-determination, and a commitment</strong> 
+                    to building solutions that empower others."
+                </blockquote>
+                <div class="w-32 h-1 bg-slate-300 dark:bg-slate-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-lg text-slate-600 dark:text-slate-300">– Isaiah N. Sumo</p>
             </div>
         </div>
     </section>
-<!-- ADD TO BOTTOM OF autobiography.html -->
-<section class="py-20 px-4 bg-gradient-to-r from-gray-600 to-gray-800 to-gray-600 text-white text-center">
-    <div class="max-w-4xl mx-auto">
-        <h3 class="text-3xl sm:text-4xl font-black mb-6">Want My Complete Story?</h3>
-        <p class="text-xl mb-10 opacity-90">Every detail, every struggle, every triumph...</p>
-        <a href="my-story.html" class="inline-flex items-center gap-4 bg-white/20 backdrop-blur-xl hover:bg-white/30 text-white px-12 py-6 rounded-3xl font-bold text-xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105">
-            <i class="fas fa-file-text text-2xl"></i>
-            Read Full Autobiography Sheet
-            <span class="ml-4 px-6 py-2 bg-white/30 rounded-2xl text-sm font-semibold">Printable Version</span>
-        </a>
-    </div>
-</section>
 
-    <!-- CTA Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-900 via-gray-800 to-blue-900">
+    <!-- Clean CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/10 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700">
         <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-xl px-8 py-4 rounded-3xl mb-8">
-                <i class="fas fa-graduation-cap text-2xl text-white"></i>
-                <span class="text-xl font-semibold text-white">MCSS Valedictorian • NOCAL Scholar • BlueCrest University</span>
+            <div class="inline-flex items-center gap-3 bg-slate-100/80 dark:bg-slate-800/80 px-8 py-5 rounded-3xl mb-10 shadow-lg">
+                <i class="fas fa-award text-2xl text-blue-600"></i>
+                <span class="text-xl font-semibold text-slate-900 dark:text-white">Valedictorian • National Scholar • IT Innovator</span>
             </div>
-            <a href="/index.html#contact" class="inline-flex items-center gap-3 bg-white text-blue-600 px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300">
-                <i class="fas fa-arrow-left"></i>
-                Let's Connect
-            </a>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-2xl mx-auto">
+                <a href="index.html#contact" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 flex-1 max-w-md">
+                    <i class="fas fa-envelope mr-2"></i>Let's Connect
+                </a>
+                <a href="autobiography.html" class="px-8 py-4 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-200 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex-1 max-w-md">
+                    <i class="fas fa-th mr-2"></i>Timeline View
+                </a>
+            </div>
         </div>
     </section>
+
+    <!-- Include Main Script -->
+    <script defer src="Assistant.js"></script>
 </body>
 </html>
