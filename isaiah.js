@@ -421,12 +421,12 @@ Please contact this person to confirm the appointment.`;
         // Copy to clipboard
         navigator.clipboard.writeText(appointmentText).then(() => {
             setTimeout(() => {
-                alert('✅ Appointment booked! Details copied to clipboard. Paste into your email:\n\n' + appointmentText);
+                alert(' Appointment booked! Details copied to clipboard. Paste into your email:\n\n' + appointmentText);
                 document.getElementById('ai-voice-modal')?.classList.add('hidden');
                 document.getElementById('appointment-form')?.reset();
                 btn.innerHTML = originalText;
                 btn.disabled = false;
-                this.addMessage('✅ Appointment successfully booked and copied to clipboard!', 'ai');
+                this.addMessage(' Appointment successfully booked and copied to clipboard!', 'ai');
                 this.speak('Appointment booked! Details copied to your clipboard.');
             }, 1500);
         }).catch(() => {
