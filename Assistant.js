@@ -1133,3 +1133,82 @@ submitBooking() {
         }, 4000);
     }
 }
+
+
+
+emailjs.init("YOUR_PUBLIC_KEY");
+
+// Contact Form
+document.getElementById('contact-form')
+.addEventListener('submit', async function(e) {
+
+    e.preventDefault();
+
+    const name = document.getElementById('contact-name');
+    const email = document.getElementById('contact-email');
+    const subject = document.getElementById('contact-subject');
+    const message = document.getElementById('contact-message');
+    const msgBox = document.getElementById('form-msg');
+
+    // Reset Borders
+    [name, email, subject, message].forEach(field => {
+        field.classList.remove('border-red-500');
+    });
+
+    let hasError = false;
+
+    // Validation
+    if (!name.value.trim()) {
+        name.classList.add('border-red-500');
+        hasError = true;
+    }
+
+    if (!email.value.trim()) {
+        email.classList.add('border-red-500');
+        hasError = true;
+    }
+
+    if (!subject.value.trim()) {
+        subject.classList.add('border-red-500');
+        hasError = true;
+    }
+
+    if (!message.value.trim()) {
+        message.classList.add('border-red-500');
+        hasError = true;
+    }
+
+    if (hasError) {
+        return;
+    }
+
+    try {
+
+        await emailjs.send(
+            "YOUR_SERVICE_ID",
+            "YOUR_TEMPLATE_ID",
+            {
+                from_name: name.value,
+                from_email: email.value,
+                subject: subject.value,
+                message: message.value
+            }
+        );
+
+        msgBox.classList.remove('hidden');
+
+        document.getElementById('contact-form').reset();
+
+        setTimeout(() => {
+            msgBox.classList.add('hidden');
+        }, 5000);
+
+    } catch (error) {
+
+        alert("Failed to send message.");
+
+        console.error(error);
+
+    }
+
+});
