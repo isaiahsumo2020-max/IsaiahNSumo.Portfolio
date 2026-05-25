@@ -428,7 +428,7 @@ function initPortfolioUI() {
         }
     });
 
-    
+
 }
 
 /* =========================
@@ -827,110 +827,110 @@ class IsaiahAI {
     }
 
 
-    
-submitBooking() {
 
-    // Get fields
-    const name = document.getElementById('book-name');
-    const email = document.getElementById('book-email');
-    const date = document.getElementById('book-date');
-    const time = document.getElementById('book-time');
+    submitBooking() {
 
-    // Reset styles
-    [name, email, date, time].forEach(field => {
-        field.classList.remove('border-red-500');
-    });
+        // Get fields
+        const name = document.getElementById('book-name');
+        const email = document.getElementById('book-email');
+        const date = document.getElementById('book-date');
+        const time = document.getElementById('book-time');
 
-    // Validation
-    let errors = [];
+        // Reset styles
+        [name, email, date, time].forEach(field => {
+            field.classList.remove('border-red-500');
+        });
 
-    if (!name.value.trim()) {
-        errors.push("Full Name");
-        name.classList.add('border-red-500');
-    }
+        // Validation
+        let errors = [];
 
-    if (!email.value.trim()) {
-        errors.push("Email Address");
-        email.classList.add('border-red-500');
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-        errors.push("Valid Email Address");
-        email.classList.add('border-red-500');
-    }
-
-    if (!date.value) {
-        errors.push("Preferred Date");
-        date.classList.add('border-red-500');
-    }
-
-    if (!time.value) {
-        errors.push("Preferred Time");
-        time.classList.add('border-red-500');
-    }
-
-    // If validation fails
-    if (errors.length > 0) {
-
-        this.addMessage(
-            `Please complete the following required field(s): ${errors.join(', ')}.`,
-            'ai'
-        );
-
-        // Optional voice feedback
-        if (this.isListening) {
-            this.speak(
-                `Please complete the required fields before submitting your appointment request.`
-            );
+        if (!name.value.trim()) {
+            errors.push("Full Name");
+            name.classList.add('border-red-500');
         }
 
-        return;
-    }
+        if (!email.value.trim()) {
+            errors.push("Email Address");
+            email.classList.add('border-red-500');
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+            errors.push("Valid Email Address");
+            email.classList.add('border-red-500');
+        }
 
-    // Button loading state
-    const btn = document.getElementById('confirm-booking-btn');
+        if (!date.value) {
+            errors.push("Preferred Date");
+            date.classList.add('border-red-500');
+        }
 
-    btn.disabled = true;
+        if (!time.value) {
+            errors.push("Preferred Time");
+            time.classList.add('border-red-500');
+        }
 
-    btn.innerHTML = `
+        // If validation fails
+        if (errors.length > 0) {
+
+            this.addMessage(
+                `Please complete the following required field(s): ${errors.join(', ')}.`,
+                'ai'
+            );
+
+            // Optional voice feedback
+            if (this.isListening) {
+                this.speak(
+                    `Please complete the required fields before submitting your appointment request.`
+                );
+            }
+
+            return;
+        }
+
+        // Button loading state
+        const btn = document.getElementById('confirm-booking-btn');
+
+        btn.disabled = true;
+
+        btn.innerHTML = `
         <i class="fas fa-spinner fa-spin mr-2"></i>
         PROCESSING...
     `;
 
-    // Simulate submission
-    setTimeout(() => {
+        // Simulate submission
+        setTimeout(() => {
 
-        this.isBookingActive = false;
-        this.bookingStep = 0;
+            this.isBookingActive = false;
+            this.bookingStep = 0;
 
-        const modal = document.getElementById('booking-modal');
+            const modal = document.getElementById('booking-modal');
 
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
 
-        this.addMessage(
-            " Your appointment request has been submitted successfully. Isaiah will review your request and respond via email shortly.",
-            'ai'
-        );
-
-        if (this.isListening) {
-            this.speak(
-                "Your appointment request has been submitted successfully."
+            this.addMessage(
+                " Your appointment request has been submitted successfully. Isaiah will review your request and respond via email shortly.",
+                'ai'
             );
-        }
 
-        // Reset form
-        document.getElementById('book-name').value = '';
-        document.getElementById('book-email').value = '';
-        document.getElementById('book-date').value = '';
-        document.getElementById('book-time').value = '';
-        document.getElementById('book-purpose').value = '';
+            if (this.isListening) {
+                this.speak(
+                    "Your appointment request has been submitted successfully."
+                );
+            }
 
-        // Reset button
-        btn.disabled = false;
+            // Reset form
+            document.getElementById('book-name').value = '';
+            document.getElementById('book-email').value = '';
+            document.getElementById('book-date').value = '';
+            document.getElementById('book-time').value = '';
+            document.getElementById('book-purpose').value = '';
 
-        btn.innerHTML = `Confirm Appointment`;
+            // Reset button
+            btn.disabled = false;
 
-    }, 1800);
-}
+            btn.innerHTML = `Confirm Appointment`;
+
+        }, 1800);
+    }
 
 
     cancelBooking() {
@@ -972,17 +972,406 @@ submitBooking() {
         if (
             msg.includes("how are you") ||
             msg.includes("how is your day") ||
-            msg.includes("how are things")  ||
+            msg.includes("how are things") ||
             msg.includes("how's it going") ||
             msg.includes("how do you feel")
         ) {
             return "I'm doing excellent, thank you for asking. Isaiah designed me to assist visitors professionally while still keeping conversations natural and engaging.";
         }
 
+        if (
+            msg.includes("who are you") ||
+            msg.includes("what are you") ||
+            msg.includes("your purpose") ||
+            msg.includes("what can you do")
+        ) {
+            return "I'm Isaiah's AI assistant, created to provide information about his background, skills, projects, and to help schedule meetings. I can answer questions about him and assist with get connected. Feel free to ask me anything about Isaiah!";
+        }
+
+        if (
+            msg.includes("help") ||
+            msg.includes("assist") ||
+            msg.includes("support") ||
+            msg.includes("need")
+        ) {
+            return "I'm here to help! How can I assist you today?";
+        }
+
+        if (
+            msg.includes("goodbye") ||
+            msg.includes("see you") ||
+            msg.includes("farewell")
+        ) {
+            return "Goodbye! Feel free to reach out if you have any more questions.";
+        }
+
+        if (
+            msg.includes("who made you") ||
+            msg.includes("who created you") ||
+            msg.includes("who developed you")
+        ) {
+            return "I was created by Isaiah N. Sumo, a networker who is also a developer.";
+        }
+
+        if (
+            msg.includes("joke") ||
+            msg.includes("funny") ||
+            msg.includes("make me laugh")
+        ) {
+            return "Why don't scientists trust atoms? Because they make up everything!";
+        }
+
+        if (
+            msg.includes("weather") ||
+            msg.includes("forecast") ||
+            msg.includes("temperature")
+        ) {
+            return "I don't have access to real-time weather information, but I can tell you that Liberia has a tropical climate with distinct wet and dry seasons.";
+        }
+
+        if (
+            msg.includes("news") ||
+            msg.includes("current events") ||
+            msg.includes("headlines")
+        ) {
+            return "I don't have access to real-time news updates, but I can tell you that Liberia has a vibrant media landscape with various local and international outlets.";
+        }
+
+        if (
+            msg.includes("time") ||
+            msg.includes("date") ||
+            msg.includes("clock")
+        ) {
+            return "The current time is " + new Date().toLocaleTimeString() + ".";
+        }
+
+        // =========================================
+// KOLOKWA / LIBERIAN ENGLISH
+// =========================================
+
+if (
+    msg.includes("what is koloqua") ||
+    msg.includes("what is kolokwa") ||
+    msg.includes("what is kolokwah") ||
+    msg.includes("speak koloqua") ||
+    msg.includes("liberian local language") ||
+    msg.includes("koloqua language") ||
+    msg.includes("kolokwa meaning")
+) {
+
+    return `
+    Koloqua (also called Kolokwa or Kolokwah) is a popular Liberian English dialect commonly spoken across Liberia 🇱🇷.
+
+    It mixes standard English with local expressions and is mostly used in everyday conversation, entertainment, and street communication.
+
+    Isaiah can understand and speak Koloqua good 😄
+    `;
+}
+
+
+// USER WANTS AI TO SPEAK KOLOKWA
+if (
+    msg.includes("speak in koloqua") ||
+    msg.includes("talk koloqua") ||
+    msg.includes("talk kolokwa") ||
+    msg.includes("let's speak koloqua") ||
+    msg.includes("speak small koloqua") ||
+    msg.includes("speak liberian english")
+) {
+
+    const replies = [
+        "Ayy no proren oo 😄 we can talk small-small kolokwa.",
+        "Yeah meh 😄 leh me come talk small koloqua na.",
+        "I own small kolokwa oo 😄 wetin you wan know?",
+        "No proren 😄 ask me anything in kolokwa.",
+        "We can vibe small in Liberian style oo 😄"
+    ];
+
+    return replies[Math.floor(Math.random() * replies.length)];
+}
+        if (
+            msg.includes("hru") ||
+            msg.includes("gud n u") ||
+            msg.includes("wassup na") ||
+            msg.includes("wah u upto na")
+        ) {
+            return "I st8 oo dahtor, thnx for asking! n u?";
+        }
+
+        if (
+            msg.includes("i'm good") ||
+            msg.includes("i freh oo") ||
+            msg.includes("i'm fine") ||
+            msg.includes("i doing well") ||
+            msg.includes("i better oo") ||
+            msg.includes("i alright oo") ||
+            msg.includes("alright oo") ||
+            msg.includes("i str8 oo") ||
+            msg.includes("i am gud")
+        ) {
+            return "Thnx God oo. so la wor tin u for me to do? I here to help u know abor Isaiah or schedule tim wor u will tolk to he or meeting him.";
+        }
+
+        if (
+            msg.includes("i naht freh meh") ||
+            msg.includes("i naht alright mehn") ||
+            msg.includes("i'm not better mehn") ||
+            msg.includes("i'm not doing well mehn") ||
+            msg.includes("i'm not fine mehn") ||
+            msg.includes("i'm not gud mehn") ||
+            msg.includes("i'm not good mehn") ||
+            msg.includes("i'm not okay mehn") ||
+            msg.includes("i'm not great mehn") ||
+            msg.includes("i'm not doing well mehn") ||
+            msg.includes("not alright mehn") ||
+            msg.includes("i not okay meh")
+        ) {
+            return "Sarry meh my friend. I hope u geh better oo! So how u wan for me to help u today?";
+        }
+
+        if (
+            msg.includes("la wor tin u can do") ||
+            msg.includes("what can u do") ||
+            msg.includes("what u doing today") ||
+            msg.includes("wyo") ||
+            msg.includes("what can u do for me") ||
+            msg.includes("wor tin u doing") ||
+            msg.includes("wor tin you wan do for me today")
+        ) {
+            return "I can help u know about Isaiah's, and help u show time to meet hem. La jeh my ownlor work deh oo my friend. So la wor tin u doing too today?";
+        }
+
+        if (
+            msg.includes("i coming go to work oo") ||
+            msg.includes("going hustle") ||
+            msg.includes("i going hustle na oo") ||
+            msg.includes("i going on stra oo") ||
+            msg.includes("i going on stra meh") ||
+            msg.includes("i going to school oo") ||
+            msg.includes("i going to school meh") ||
+            msg.includes("i going to work meh") ||
+            msg.includes("i going to work oo")
+        ) {
+            return "Hmmm, la ayy my friend! taky easy oo. Jeh teh me if u wan know anything about Isaiah";
+        }
+
+        if (
+            msg.includes("how yor day going") ||
+            msg.includes("wyo") ||
+            msg.includes("how yor day been") ||
+            msg.includes("how yor day been going")
+        ) {
+            return "My day been going gud oo, thank you for asking! How I can help you know about Isaiah today?";
+        }
+
+
+        if (
+            msg.includes("i'm not good") ||
+            msg.includes("i'm not fine") ||
+            msg.includes("i'm not doing well") ||
+            msg.includes("i'm not great") ||
+            msg.includes("i'm not okay") ||
+            msg.includes("i'm not alright")
+        ) {
+            return "I'm sorry to hear that. I hope you feel better soon! How can I assist you today?";
+        }
+
+
+
+        // MY KOLOKWA FLOW
+
+        // HOW ARE YOU
+        if (
+            msg.includes("hru") ||
+            msg.includes("how you doing") ||
+            msg.includes("how u doing") ||
+            msg.includes("gud n u") ||
+            msg.includes("wassup na") ||
+            msg.includes("wah u upto na") ||
+            msg.includes("how your day") ||
+            msg.includes("u good?")
+        ) {
+
+            const replies = [
+                "I st8 oo my friend, thanks for asking. How yor ownlor side?",
+                "Everything cool on my side oo. How you doing today?",
+                "I freh oo dahtor, wbu?",
+                "All good this side. I hope you freh too oo.",
+                "I quiet oo, jeh here helping pepo know about Isaiah 😄"
+            ];
+
+            return replies[Math.floor(Math.random() * replies.length)];
+        }
+
+        // USER IS GOOD
+        if (
+            msg.includes("i'm good") ||
+            msg.includes("i freh oo") ||
+            msg.includes("i'm fine") ||
+            msg.includes("i doing well") ||
+            msg.includes("i better oo") ||
+            msg.includes("i alright oo") ||
+            msg.includes("alright oo") ||
+            msg.includes("i str8 oo") ||
+            msg.includes("i am gud") ||
+            msg.includes("i dey")
+        ) {
+
+            const replies = [
+                "Thnx God oo 😄 So how I can help you today?",
+                "Good to hear that oo my friend 🙌",
+                "Ayy nice one oo 😄 Jeh ask me anything about Isaiah.",
+                "Glad say everything cool with you oo.",
+                "Perfect 😄 You can ask me about Isaiah skills, projects, or schedule meeting."
+            ];
+
+            return replies[Math.floor(Math.random() * replies.length)];
+        }
+
+        // USER NOT GOOD
+        if (
+            msg.includes("i not okay") ||
+            msg.includes("i'm not good") ||
+            msg.includes("i'm not fine") ||
+            msg.includes("i'm not okay") ||
+            msg.includes("not alright") ||
+            msg.includes("i naht freh meh")
+        ) {
+
+            const replies = [
+                "Sarry for hear that oo my friend 💙 I hope things get better soon.",
+                "Aww meh 😔 taky easy on yourself oo.",
+                "Sorry oo. Life hard sometimes but keep pushing 💪",
+                "I hope your day gets better oo",
+                "Jeh stay strong oo my friend."
+            ];
+
+            return replies[Math.floor(Math.random() * replies.length)];
+        }
+
+        // WHAT CAN YOU DO
+        if (
+            msg.includes("what can u do") ||
+            msg.includes("la wor tin u can do") ||
+            msg.includes("what you can help with") ||
+            msg.includes("wyo") ||
+            msg.includes("help me")
+        ) {
+
+            return `I can help you with:
+    • Information about Isaiah
+    • His projects & skills
+    • Booking meetings
+    • Career & tech discussion
+
+    Jeh ask me anything 😄
+    `;
+        }
+
+        // GOING TO WORK / SCHOOL
+        if (
+            msg.includes("going hustle") ||
+            msg.includes("i going to work") ||
+            msg.includes("i going school") ||
+            msg.includes("i going to school") ||
+            msg.includes("i going hustle na")
+        ) {
+
+            const replies = [
+                "Ayy taky easy oo 😄 hustle hard but stay safe.",
+                "Jeh go do your thing oo 💪",
+                "More grace on the hustle oo my friend.",
+                "School first oo 😄 wish you success.",
+                "God will bless the hustle oo today 🙌"
+            ];
+
+            return replies[Math.floor(Math.random() * replies.length)];
+        }
+
+        // GREETINGS
+        if (
+            msg === "hi" ||
+            msg === "hello" ||
+            msg === "hey" ||
+            msg === "yo" ||
+            msg === "sup"
+        ) {
+
+            const replies = [
+                "Hey 👋 welcome here!",
+                "Hello, how can I help you today?",
+                "Wassup my friend 😄",
+                "Hi👋 ask me anything about Isaiah.",
+                "Yo 😄 good to see you here.",
+                "yeah wassup, how can I help you today?"
+            ];
+
+            return replies[Math.floor(Math.random() * replies.length)];
+        }
+
+        // MORNING
+        if (
+            msg.includes("good morning") ||
+            msg.includes("gm") ||
+            msg.includes("gud morning") ||
+            msg.includes("morning")
+        ) {
+
+            return "Good morning, hope your day starts well oo. How I can help you today, about Isaiah?";
+        }
+
+        // AFTERNOON
+        if (
+            msg.includes("good afternoon")
+        ) {
+
+            return "Good afternoon, hope everything going smooth on your side.";
+        }
+
+        // EVENING
+        if (
+            msg.includes("good evening") ||
+            msg.includes("good night")
+        ) {
+
+            return "Good evening, hope you having peaceful time.";
+        }
+
+        // THANK YOU
+        if (
+            msg.includes("thank you") ||
+            msg.includes("thanks") ||
+            msg.includes("thnx") ||
+            msg.includes("appreciate it")
+        ) {
+
+            const replies = [
+                "You welcome oo 😄",
+                "No problem my friend 🙌",
+                "Anytime oo 💪",
+                "Glad I could help 😄",
+                "Always here to help oo."
+            ];
+
+            return replies[Math.floor(Math.random() * replies.length)];
+        }
+
+        // BYE
+        if (
+            msg.includes("bye") ||
+            msg.includes("later") ||
+            msg.includes("see you")
+        ) {
+
+            return "Alright oo 😄 take care and come back anytime.";
+        }
+
+
         // Thanks
         if (
             msg.includes("thank you") ||
-            msg.includes("thanks")
+            msg.includes("thanks") ||
+            msg.includes("thnx")
         ) {
             return "You're welcome. Feel free to ask anything about Isaiah’s experience, projects, or professional journey.";
         }
@@ -1010,7 +1399,7 @@ submitBooking() {
             return "Isaiah is involved in various activities and has a keen interest in technology and innovation.";
         }
 
-        return "I'm Isaiah's AI assistant. I can help you learn more about him or schedule a meeting, with him.";
+        return "I'm Isaiah's assistant. I here to help you learn more about him or schedule a meeting, with him.";
 
     }
 
@@ -1140,75 +1529,75 @@ emailjs.init("YOUR_PUBLIC_KEY");
 
 // Contact Form
 document.getElementById('contact-form')
-.addEventListener('submit', async function(e) {
+    .addEventListener('submit', async function (e) {
 
-    e.preventDefault();
+        e.preventDefault();
 
-    const name = document.getElementById('contact-name');
-    const email = document.getElementById('contact-email');
-    const subject = document.getElementById('contact-subject');
-    const message = document.getElementById('contact-message');
-    const msgBox = document.getElementById('form-msg');
+        const name = document.getElementById('contact-name');
+        const email = document.getElementById('contact-email');
+        const subject = document.getElementById('contact-subject');
+        const message = document.getElementById('contact-message');
+        const msgBox = document.getElementById('form-msg');
 
-    // Reset Borders
-    [name, email, subject, message].forEach(field => {
-        field.classList.remove('border-red-500');
+        // Reset Borders
+        [name, email, subject, message].forEach(field => {
+            field.classList.remove('border-red-500');
+        });
+
+        let hasError = false;
+
+        // Validation
+        if (!name.value.trim()) {
+            name.classList.add('border-red-500');
+            hasError = true;
+        }
+
+        if (!email.value.trim()) {
+            email.classList.add('border-red-500');
+            hasError = true;
+        }
+
+        if (!subject.value.trim()) {
+            subject.classList.add('border-red-500');
+            hasError = true;
+        }
+
+        if (!message.value.trim()) {
+            message.classList.add('border-red-500');
+            hasError = true;
+        }
+
+        if (hasError) {
+            return;
+        }
+
+        try {
+
+            await emailjs.send(
+                "YOUR_SERVICE_ID",
+                "YOUR_TEMPLATE_ID",
+                {
+                    from_name: name.value,
+                    from_email: email.value,
+                    subject: subject.value,
+                    message: message.value
+                }
+            );
+
+            msgBox.classList.remove('hidden');
+
+            document.getElementById('contact-form').reset();
+
+            setTimeout(() => {
+                msgBox.classList.add('hidden');
+            }, 5000);
+
+        } catch (error) {
+
+            alert("Failed to send message.");
+
+            console.error(error);
+
+        }
+
     });
-
-    let hasError = false;
-
-    // Validation
-    if (!name.value.trim()) {
-        name.classList.add('border-red-500');
-        hasError = true;
-    }
-
-    if (!email.value.trim()) {
-        email.classList.add('border-red-500');
-        hasError = true;
-    }
-
-    if (!subject.value.trim()) {
-        subject.classList.add('border-red-500');
-        hasError = true;
-    }
-
-    if (!message.value.trim()) {
-        message.classList.add('border-red-500');
-        hasError = true;
-    }
-
-    if (hasError) {
-        return;
-    }
-
-    try {
-
-        await emailjs.send(
-            "YOUR_SERVICE_ID",
-            "YOUR_TEMPLATE_ID",
-            {
-                from_name: name.value,
-                from_email: email.value,
-                subject: subject.value,
-                message: message.value
-            }
-        );
-
-        msgBox.classList.remove('hidden');
-
-        document.getElementById('contact-form').reset();
-
-        setTimeout(() => {
-            msgBox.classList.add('hidden');
-        }, 5000);
-
-    } catch (error) {
-
-        alert("Failed to send message.");
-
-        console.error(error);
-
-    }
-
-});
