@@ -1377,25 +1377,48 @@ if (
         }
 
 
-        if (msg.includes('about') || msg.includes('who') || msg.includes('personality') || msg.includes('background')) {
-            return "Isaiah N. Sumo is an Information Technology student specializing in Networking and System Administration at BlueCrest University Liberia.";
+        if (
+            msg.includes('about') || 
+            msg.includes('who') || 
+            msg.includes('personality') || 
+            msg.includes('background')
+        ) {
+            return "Isaiah N. Sumo is an Information Technology student specializing in Networking and System Administration, also interested in Graphic Design and Web Development.";
         }
 
-        if (msg.includes('skills') || msg.includes('expertise') || msg.includes('know') || msg.includes('abilities')) {
+        if (
+            msg.includes('skills') || 
+            msg.includes('expertise') || 
+            msg.includes('know') || 
+            msg.includes('abilities')) {
             return "Isaiah specializes in Networking, Graphic Design, System Administration, Web Development, and Cybersecurity.";
         }
 
-        if (msg.includes('projects') || msg.includes('work') || msg.includes('experience') || msg.includes('built')) {
+        if (
+            msg.includes('projects') || 
+            msg.includes('work') || 
+            msg.includes('experience') || 
+            msg.includes('built')
+        ) {
             return "Isaiah has worked on various projects, including a video finding platform, a tourism and informational hub concepts for all 15 counties, networking projects, and digital branding platforms.";
         }
 
 
-        if (msg.includes('contact') || msg.includes('email') || msg.includes('reach')) {
+        if (
+            msg.includes('contact') || 
+            msg.includes('email') || 
+            msg.includes('reach')
+        )  {
             return `To connect with Isaiah, use the contact form below. Or schedule a meeting!
             He's available for for collaborative projects, and discussions and to do business. He will respond within 24-48 hours.`;
         }
 
-        if (msg.includes('involvement') || msg.includes('activities') || msg.includes('extracurricular') || msg.includes('interests')) {
+        if (
+            msg.includes('involvement') || 
+            msg.includes('activities') || 
+            msg.includes('extracurricular') || 
+            msg.includes('interests')
+        ) {
             return "Isaiah is involved in various activities and has a keen interest in technology and innovation.";
         }
 
