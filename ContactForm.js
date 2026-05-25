@@ -79,6 +79,7 @@ document.getElementById("contact-form").addEventListener("submit", async functio
         // SEND MAIN EMAIL TO YOU
         await emailjs.send("service_x8mdqgk",
             "template_f5t5qfn", {
+            to_email: "sumobequizzy@gmail.com",
             from_name: name.value,
             from_email: email.value,
             subject: subject.value,

@@ -975,7 +975,7 @@ class IsaiahAI {
             msg.includes("how's it going") ||
             msg.includes("how do you feel")
         ) {
-            return "I'm doing excellent, thank you for asking. Isaiah designed me to assist visitors professionally while still keeping conversations natural and engaging.";
+            return "I'm doing excellent, thank you for asking. Isaiah designed me to assist visitors with some info about him while he is away. How can I assist you today?";
         }
 
         if (
@@ -984,7 +984,7 @@ class IsaiahAI {
             msg.includes("your purpose") ||
             msg.includes("what can you do")
         ) {
-            return "I'm Isaiah's AI assistant, created to provide information about his background, skills, projects, and to help schedule meetings. I can answer questions about him and assist with get connected. Feel free to ask me anything about Isaiah!";
+            return "I'm Isaiah's AI assistant, created to provide information about his background, skills, projects, and to help schedule meetings. I can answer questions about him and assist with getting connected. Feel free to ask me anything about Isaiah!";
         }
 
         if (
@@ -1091,6 +1091,31 @@ if (
         
         // MY KOLOKWA FLOW
 
+        //WHAt ARE YOU DOING
+        if (
+            msg.includes("what you doing") ||
+            msg.includes("what u doing") ||
+            msg.includes("what are you doing") ||
+            msg.includes("wah u upto") ||
+            msg.includes("wah u upto na") ||
+            msg.includes("what's up") ||
+            msg.includes("wassup") ||
+            msg.includes("wbu") ||
+            msg.includes("how about you") ||
+            msg.includes("wyo")
+        ) {
+            const replies = [
+                "I jeh here oo, dahtor, my owlor work is to talk about Isaiah, wbu?",
+                "Jeh here ooo, ready to tell you about anything you want to know about Isaiah. How about you?",
+                "I here oo, wbu? Ask me anything about Isaiah.",
+                "Not tin els oo, jeh n ready always to talk about Isaiah, wbu?",
+            ];
+
+            return replies[Math.floor(Math.random() * replies.length)];
+        }
+
+
+
         // HOW ARE YOU
         if (
             msg.includes("hru") ||
@@ -1100,14 +1125,20 @@ if (
             msg.includes("wassup na") ||
             msg.includes("wah u upto na") ||
             msg.includes("how your day") ||
-            msg.includes("u good?")
+            msg.includes("u good?") ||
+            msg.includes("u doing?") ||
+            msg.includes("n u") ||
+            msg.includes("how you feeling") ||
+            msg.includes(" and you") ||
+            msg.includes("n you") ||
+            msg.includes("u alright?")
         ) {
 
             const replies = [
                 "I st8 oo my friend, thanks for asking. How yor ownlor side?",
                 "Everything cool on my side oo. How you doing today?",
                 "I freh oo dahtor, wbu?",
-                "All good this side. I hope you freh too oo.",
+                "Everything good from my side. I hope you freh too oo.",
                 "I quiet oo, jeh here helping pepo know about Isaiah 😄"
             ];
 
