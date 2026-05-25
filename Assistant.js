@@ -959,13 +959,12 @@ class IsaiahAI {
         if (
             msg.includes("hello") ||
             msg.includes("hi") ||
-            msg.includes("hey") ||
             msg.includes("greetings") ||
             msg.includes("good morning") ||
             msg.includes("good afternoon") ||
             msg.includes("good evening")
         ) {
-            return "Hello and welcome. I'm Isaiah's AI assistant. I’d be happy to help you learn more about his background, projects, technical expertise, or schedule a professional meeting.";
+            return "Hello and welcome. I'm  Isico Isaiah's assistant. I’d be happy to help you learn  more about him, or schedule a meeting with him.";
         }
 
         // How are you
@@ -1089,95 +1088,7 @@ if (
 
     return replies[Math.floor(Math.random() * replies.length)];
 }
-        if (
-            msg.includes("hru") ||
-            msg.includes("gud n u") ||
-            msg.includes("wassup na") ||
-            msg.includes("wah u upto na")
-        ) {
-            return "I st8 oo dahtor, thnx for asking! n u?";
-        }
-
-        if (
-            msg.includes("i'm good") ||
-            msg.includes("i freh oo") ||
-            msg.includes("i'm fine") ||
-            msg.includes("i doing well") ||
-            msg.includes("i better oo") ||
-            msg.includes("i alright oo") ||
-            msg.includes("alright oo") ||
-            msg.includes("i str8 oo") ||
-            msg.includes("i am gud")
-        ) {
-            return "Thnx God oo. so la wor tin u for me to do? I here to help u know abor Isaiah or schedule tim wor u will tolk to he or meeting him.";
-        }
-
-        if (
-            msg.includes("i naht freh meh") ||
-            msg.includes("i naht alright mehn") ||
-            msg.includes("i'm not better mehn") ||
-            msg.includes("i'm not doing well mehn") ||
-            msg.includes("i'm not fine mehn") ||
-            msg.includes("i'm not gud mehn") ||
-            msg.includes("i'm not good mehn") ||
-            msg.includes("i'm not okay mehn") ||
-            msg.includes("i'm not great mehn") ||
-            msg.includes("i'm not doing well mehn") ||
-            msg.includes("not alright mehn") ||
-            msg.includes("i not okay meh")
-        ) {
-            return "Sarry meh my friend. I hope u geh better oo! So how u wan for me to help u today?";
-        }
-
-        if (
-            msg.includes("la wor tin u can do") ||
-            msg.includes("what can u do") ||
-            msg.includes("what u doing today") ||
-            msg.includes("wyo") ||
-            msg.includes("what can u do for me") ||
-            msg.includes("wor tin u doing") ||
-            msg.includes("wor tin you wan do for me today")
-        ) {
-            return "I can help u know about Isaiah's, and help u show time to meet hem. La jeh my ownlor work deh oo my friend. So la wor tin u doing too today?";
-        }
-
-        if (
-            msg.includes("i coming go to work oo") ||
-            msg.includes("going hustle") ||
-            msg.includes("i going hustle na oo") ||
-            msg.includes("i going on stra oo") ||
-            msg.includes("i going on stra meh") ||
-            msg.includes("i going to school oo") ||
-            msg.includes("i going to school meh") ||
-            msg.includes("i going to work meh") ||
-            msg.includes("i going to work oo")
-        ) {
-            return "Hmmm, la ayy my friend! taky easy oo. Jeh teh me if u wan know anything about Isaiah";
-        }
-
-        if (
-            msg.includes("how yor day going") ||
-            msg.includes("wyo") ||
-            msg.includes("how yor day been") ||
-            msg.includes("how yor day been going")
-        ) {
-            return "My day been going gud oo, thank you for asking! How I can help you know about Isaiah today?";
-        }
-
-
-        if (
-            msg.includes("i'm not good") ||
-            msg.includes("i'm not fine") ||
-            msg.includes("i'm not doing well") ||
-            msg.includes("i'm not great") ||
-            msg.includes("i'm not okay") ||
-            msg.includes("i'm not alright")
-        ) {
-            return "I'm sorry to hear that. I hope you feel better soon! How can I assist you today?";
-        }
-
-
-
+        
         // MY KOLOKWA FLOW
 
         // HOW ARE YOU
@@ -1294,7 +1205,8 @@ if (
             msg === "hello" ||
             msg === "hey" ||
             msg === "yo" ||
-            msg === "sup"
+            msg === "sup" ||
+            msg === "whatsup" 
         ) {
 
             const replies = [
